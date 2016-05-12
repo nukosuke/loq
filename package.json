@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/nukosuke/nukolog#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2"
   }
 }
