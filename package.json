@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/nukosuke/nukolog/issues"
   },
-  "homepage": "https://github.com/nukosuke/nukolog#readme"
+  "homepage": "https://github.com/nukosuke/nukolog#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
