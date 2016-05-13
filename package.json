@@ -1,5 +1,5 @@
 {
-  "name": "nukolog",
+  "name": "loq",
   "version": "0.0.0",
   "description": "blogging system",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nukosuke/nukolog.git"
+    "url": "git+https://github.com/nukosuke/loq.git"
   },
   "keywords": [
     "blog"
@@ -17,9 +17,9 @@
   "author": "nukosuke",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nukosuke/nukolog/issues"
+    "url": "https://github.com/nukosuke/loq/issues"
   },
-  "homepage": "https://github.com/nukosuke/nukolog#readme",
+  "homepage": "https://github.com/nukosuke/loq#readme",
   "dependencies": {
     "express": "^4.13.4",
     "react": "^15.0.2",
