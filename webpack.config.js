@@ -14,15 +14,16 @@ module.exports = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['', 'js', 'jsx', 'css', 'scss'],
+    extensions: ['', '.js', '.jsx', '.css', '.scss'],
     root: [
       path.join(__dirname, 'client/javascripts'),
       path.join(__dirname, 'client/stylesheets'),
     ],
+    modulesDirectories: ['node_modules'],
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel' },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
       { test: /\.css$/, loader: 'css' },
       { test: /\.scss$/, loader: 'scss' },
     ],
