@@ -1,0 +1,37 @@
+{
+  "name": "loq",
+  "version": "0.0.0",
+  "description": "blogging system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nukosuke/loq.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "nukosuke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nukosuke/loq/issues"
+  },
+  "homepage": "https://github.com/nukosuke/loq#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.4.0",
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.8.0",
+    "babel-loader": "^6.2.4",
+    "gulp": "^3.9.1",
+    "webpack": "^1.13.0"
+  }
+}
