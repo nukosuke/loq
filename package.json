@@ -29,6 +29,7 @@
     "redux": "^3.5.2"
   },
   "devDependencies": {
+    "babel-loader": "^6.2.4",
     "gulp": "^3.9.1",
     "webpack": "^1.13.0"
   }
