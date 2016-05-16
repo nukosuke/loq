@@ -10,25 +10,22 @@ var app = express();
 // static directory
 app.use('/assets', express.static(__dirname + '/../public/assets'));
 //TODO: favicon & robots.txt
+app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
 
 // view template engine
 app.set('views', __dirname+'/views');
 app.set('view engine', 'jade');
 
 // parsing json request
-//TODO: app.use(bodyParser.json);
+//TODO: app.use(bodyParser.json());
 
 
 /**
  * routing middleware
  * configuration
  */
-//TODO: var adminRouter = require('./admin-router');
-//TODO: app.use('/admin', adminRouter);
-app.get('/', function(req, res) {
-  return res.render('admin/index', { title: 'admin' });
-});
-//TODO: app.use('/', userRouter);
+app.use('/users', require('./routes/user-routes'));
+app.use('/admin', require('./routes/admin-routes'));
 
 
 app.listen(process.env.PORT || 3000);
