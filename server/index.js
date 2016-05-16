@@ -10,6 +10,7 @@ var app = express();
 // static directory
 app.use('/assets', express.static(__dirname + '/../public/assets'));
 //TODO: favicon & robots.txt
+app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
 
 // view template engine
 app.set('views', __dirname+'/views');
