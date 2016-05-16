@@ -23,12 +23,11 @@ app.set('view engine', 'jade');
  * routing middleware
  * configuration
  */
-//TODO: var adminRouter = require('./admin-router');
-//TODO: app.use('/admin', adminRouter);
 app.get('/', function(req, res) {
+  return res.render('users/index', { title: 'users' });
+});
+app.get('/admin', function(req, res) {
   return res.render('admin/index', { title: 'admin' });
 });
-//TODO: app.use('/', userRouter);
-
 
 app.listen(process.env.PORT || 3000);
