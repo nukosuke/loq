@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
+    "build": "./node_modules/.bin/webpack --color",
     "test": "./node_modules/.bin/mocha && ./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/nukosuke/loq#readme",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "react": "^15.0.2",
@@ -38,6 +40,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
     "karma": "^0.13.22",
     "karma-mocha": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.0",
