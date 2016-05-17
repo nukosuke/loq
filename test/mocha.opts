@@ -1,0 +1,4 @@
+test/server
+--recursive
+--color
+--reporter spec
