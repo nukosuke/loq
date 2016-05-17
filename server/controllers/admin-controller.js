@@ -1,3 +1,6 @@
+/**
+ * AdminController
+ */
 module.exports = {
-  index: (req, res) => res.render('admin/index', { title: 'admin' })
+  index: (req, res) => res.render('admin/index', { title: 'admin' }),
 }
