@@ -39,6 +39,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
     "karma": "^0.13.22",
     "karma-mocha": "^1.0.1",
     "karma-phantomjs-launcher": "^1.0.0",
