@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/.bin/mocha && ./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
