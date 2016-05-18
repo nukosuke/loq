@@ -1,12 +1,12 @@
 module.exports = {
   "development": {
     "storage": "db/development.db",
-    "dialect": "sqlite3",
+    "dialect": "sqlite",
   },
 
   "test": {
     "storage": "db/test.db",
-    "dialect": "sqlite3",
+    "dialect": "sqlite",
   },
 
   "production": {
