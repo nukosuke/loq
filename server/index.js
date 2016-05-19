@@ -2,6 +2,7 @@
 var express    = require('express');
 var bodyParser = require('body-parser');
 var Sequelize  = require('sequelize');
+var passport   = require('passport');
 var app = express();
 
 /**
@@ -35,13 +36,15 @@ app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
 app.set('views', __dirname+'/views');
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 /**
  * authentication
  * configuration
  */
-var passport = require('passport');
 require('./middlewares/passport')(app, passport, config);
+app.set('passport', passport);
 
 /**
  * define model schemas
@@ -56,10 +59,12 @@ app.set('models', models);
  * create controller
  * instances
  */
+var UserController = require('./controllers/user-controller');
+var AdminController = require('./controllers/admin-controller');
 var controllers = {
   //TODO: move controllers creation from each class definition file
-  user:  require('./controllers/user-controller'),
-  admin: require('./controllers/admin-controller'),
+  user:  new UserController(),
+  admin: new AdminController(),
 };
 app.set('controllers', controllers);
 
