@@ -1,17 +1,19 @@
+'use strict';
+
 /**
  * UserController
  */
-module.exports = {
-  index: function(req, res) {
+class UserController {
+  index(req, res) {
     res.render('users/index', { title: 'users' })
-  },
+  }
 
-  login: function(req, res) {
+  login(req, res) {
     res.render('users/login', { title: 'ログイン' })
-  },
+  }
 
   //TODO: remove this method
-  check: function(req, res) {
+  check(req, res) {
     var User = req.app.get('models').User;
 
     User.findOne({uid: 'example01'}).then(function(users) {
@@ -19,11 +21,7 @@ module.exports = {
       if (!users) { return res.json({ message: 'not found' }); }
       return res.render('users/login', { title: 'login', users: JSON.stringify(users) });
     });
-  },
+  }
+};
 
-  /**
-   * authenticate methods
-   */
-  passwordAuth: null,
-  jwtAuth: null,
-}
+module.exports = new UserController();

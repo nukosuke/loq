@@ -1,6 +1,12 @@
+'use strict';
+
 /**
  * AdminController
  */
-module.exports = {
-  index: (req, res) => res.render('admin/index', { title: 'admin' }),
-}
+class AdminController {
+  index(req, res) {
+    return res.render('admin/index', { title: 'admin' });
+  }
+};
+
+module.exports = new AdminController();
