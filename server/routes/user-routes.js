@@ -2,6 +2,9 @@ var express    = require('express');
 var controller = require('../controllers/user-controller');
 var router     = express.Router();
 
+//TODO: remove this
+router.get('/check', controller.check);
+
 router.get('/', controller.index);
 //router.get('/:username', controller.show);
 
