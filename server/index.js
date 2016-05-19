@@ -58,6 +58,8 @@ app.set('models', models);
  */
 var controllers = {
   //TODO: move controllers creation from each class definition file
+  user:  require('./controllers/user-controller'),
+  admin: require('./controllers/admin-controller'),
 };
 app.set('controllers', controllers);
 
@@ -65,9 +67,12 @@ app.set('controllers', controllers);
  * routing middleware
  * configuration
  */
-app.use('/', require('./routes/authenticate-routes'));
-app.use('/users', require('./routes/user-routes'));
-app.use('/admin', require('./routes/admin-routes'));
+var authRouter  = require('./routes/authenticate-routes')(controllers);
+var userRouter  = require('./routes/user-routes')(controllers);
+var adminRouter = require('./routes/admin-routes')(controllers);
+app.use(authRouter);
+app.use('/users', userRouter);
+app.use('/admin', adminRouter);
 
 
 app.listen(process.env.PORT || 3000);

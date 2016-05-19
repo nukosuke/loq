@@ -1,11 +1,16 @@
-var express    = require('express');
-var controller = require('../controllers/admin-controller');
-var router     = express.Router();
+'use strict';
 
-router.get('/', controller.index);
+/**
+ * admin routes
+ */
+module.exports = function(controllers) {
+  var router = require('express').Router();
 
-// JSON API
-//router.post('/settings/', controller.);
-//router.post('/settings/', controller.);
+  router.get('/', controllers.admin.index);
 
-module.exports = router;
+  // JSON API
+  //router.post('/settings/', controller.);
+  //router.post('/settings/', controller.);
+
+  return router;
+};
