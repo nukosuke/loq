@@ -5,6 +5,11 @@ var Sequelize  = require('sequelize');
 var app = express();
 
 /**
+ * mode
+ */
+var mode = process.env.NODE_ENV || 'development';
+
+/**
  * load configuration files
  */
 var config = {
@@ -41,13 +46,20 @@ require('./middlewares/passport')(app, passport, config);
 /**
  * define model schemas
  */
- //TODO: test & production configuration
-var sequelize = new Sequelize(config.database.development);
+var sequelize = new Sequelize(config.database[mode]);
 var models = {
   User: require('./models/user')(sequelize, Sequelize),
 };
 app.set('models', models);
 
+/**
+ * create controller
+ * instances
+ */
+var controllers = {
+  //TODO: move controllers creation from each class definition file
+};
+app.set('controllers', controllers);
 
 /**
  * routing middleware
