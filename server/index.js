@@ -2,7 +2,13 @@
 var express    = require('express');
 var bodyParser = require('body-parser');
 var Sequelize  = require('sequelize');
+var passport   = require('passport');
 var app = express();
+
+/**
+ * mode
+ */
+var mode = process.env.NODE_ENV || 'development';
 
 /**
  * load configuration files
@@ -11,6 +17,7 @@ var config = {
   //config:         require('../config/config'),
   //logger: require('../config/logger'),
   database:       require('../config/database'),
+  authentication: require('../config/authentication'),
   //oauthProviders: require('../config/oauth-providers'),
 };
 app.set('config', config);
@@ -29,32 +36,48 @@ app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
 app.set('views', __dirname+'/views');
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 /**
  * authentication
  * configuration
  */
-var passport = require('passport');
-
+require('./middlewares/passport')(app, passport, config);
+app.set('passport', passport);
 
 /**
  * define model schemas
  */
- //TODO: test & production configuration
-var sequelize = new Sequelize(config.database.development);
+var sequelize = new Sequelize(config.database[mode]);
 var models = {
   User: require('./models/user')(sequelize, Sequelize),
 };
 app.set('models', models);
 
+/**
+ * create controller
+ * instances
+ */
+var UserController = require('./controllers/user-controller');
+var AdminController = require('./controllers/admin-controller');
+var controllers = {
+  //TODO: move controllers creation from each class definition file
+  user:  new UserController(),
+  admin: new AdminController(),
+};
+app.set('controllers', controllers);
 
 /**
  * routing middleware
  * configuration
  */
-app.use('/', require('./routes/authenticate-routes'));
-app.use('/users', require('./routes/user-routes'));
-app.use('/admin', require('./routes/admin-routes'));
+var authRouter  = require('./routes/authenticate-routes')(controllers);
+var userRouter  = require('./routes/user-routes')(controllers);
+var adminRouter = require('./routes/admin-routes')(controllers);
+app.use(authRouter);
+app.use('/users', userRouter);
+app.use('/admin', adminRouter);
 
 
 app.listen(process.env.PORT || 3000);

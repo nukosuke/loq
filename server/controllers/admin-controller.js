@@ -1,6 +1,11 @@
+'use strict';
+var BaseController = require('./base-controller');
+
 /**
  * AdminController
  */
-module.exports = {
-  index: (req, res) => res.render('admin/index', { title: 'admin' }),
-}
+module.exports = class AdminController extends BaseController {
+  index(req, res) {
+    return res.render('admin/index', { title: 'admin' });
+  }
+};

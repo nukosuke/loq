@@ -1,22 +1,25 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var JwtStrategy = require('passport-jwt').Strategy;
-//TODO: var ExtractJwt =
+'use strict';
+var BaseController = require('./base-controller');
+var HttpStatus = require('http-status');
 
 /**
  * UserController
  */
-module.exports = {
-  index: function(req, res) {
-    res.render('users/index', { title: 'users' })
-  },
+module.exports = class UserController extends BaseController {
+  constructor() {
+    super();
+  }
 
-  login: function(req, res) {
+  index(req, res) {
+    res.render('users/index', { title: 'users' })
+  }
+
+  login(req, res) {
     res.render('users/login', { title: 'ログイン' })
-  },
+  }
 
   //TODO: remove this method
-  check: function(req, res) {
+  check(req, res) {
     var User = req.app.get('models').User;
 
     User.findOne({uid: 'example01'}).then(function(users) {
@@ -24,11 +27,22 @@ module.exports = {
       if (!users) { return res.json({ message: 'not found' }); }
       return res.render('users/login', { title: 'login', users: JSON.stringify(users) });
     });
-  },
+  }
 
-  /**
-   * authenticate methods
-   */
-  passwordAuth: null,
-  jwtAuth: null,
-}
+  authenticate(req, res, next) {
+    req.app.get('passport').authenticate('local', function(err, user, info) {
+      if (err) {
+        return res.json(err);
+      }
+      if (!user) {
+        console.log(info);
+        return res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
+      }
+
+      //TODO: return JWT
+      return res.send('ok');
+    })(req, res, next);
+  }
+};

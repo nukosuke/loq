@@ -1,20 +1,24 @@
-var express    = require('express');
-var controller = require('../controllers/user-controller');
-var router     = express.Router();
+'use strict';
 
-//TODO: remove this
-router.get('/check', controller.check);
+/**
+ * user routes
+ */
+module.exports = function(controllers) {
+  var router = require('express').Router();
 
-router.get('/', controller.index);
-//router.get('/:username', controller.show);
+  //TODO: remove this
+  router.get('/check', controllers.user.check);
 
-// require authenticate
-//TODO: use passport to authenticate
-//TODO: users/settings-controller.js
-//router.get('/settings', controller);
-// JSON API
-//router.post('/settings/profile', controller.updateProfile);
-//router.post('/settings/password', controller.updatePassword);
-//router.post('/settings/oauth/:provider', controller.updateOauthProvider);
+  router.get('/', controllers.user.index);
+  //router.get('/:username', controller.show);
 
-module.exports = router;
+  // require authenticate
+  //TODO: use passport to authenticate
+  //TODO: users/settings-controller.js
+  //router.get('/settings', controller);
+  // JSON API
+  //router.post('/settings/profile', controller.updateProfile);
+  //router.post('/settings/password', controller.updatePassword);
+  //router.post('/settings/oauth/:provider', controller.updateOauthProvider);
+  return router;
+};
