@@ -1,3 +1,9 @@
+'use strict';
+
+/**
+ * database
+ * configuration
+ */
 module.exports = {
   development: {
     storage: 'db/development.db',
