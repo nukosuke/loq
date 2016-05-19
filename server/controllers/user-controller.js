@@ -1,9 +1,10 @@
 'use strict';
+var BaseController = require('./base-controller');
 
 /**
  * UserController
  */
-class UserController {
+class UserController extends BaseController {
   index(req, res) {
     res.render('users/index', { title: 'users' })
   }
