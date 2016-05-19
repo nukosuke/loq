@@ -1,6 +1,34 @@
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var JwtStrategy = require('passport-jwt').Strategy;
+//TODO: var ExtractJwt =
+
 /**
  * UserController
  */
 module.exports = {
-  index: (req, res) => res.render('users/index', { title: 'user' }),
+  index: function(req, res) {
+    res.render('users/index', { title: 'users' })
+  },
+
+  login: function(req, res) {
+    res.render('users/login', { title: 'ログイン' })
+  },
+
+  //TODO: remove this method
+  check: function(req, res) {
+    var User = req.app.get('models').User;
+
+    User.findOne({uid: 'example01'}).then(function(users) {
+      //if (err) { return res.json(err); }
+      if (!users) { return res.json({ message: 'not found' }); }
+      return res.render('users/login', { title: 'login', users: JSON.stringify(users) });
+    });
+  },
+
+  /**
+   * authenticate methods
+   */
+  passwordAuth: null,
+  jwtAuth: null,
 }

@@ -34,3 +34,4 @@ node_modules
 
 # assets output directory
 public/assets
+db/*.db
