@@ -1,10 +1,15 @@
 'use strict';
 var BaseController = require('./base-controller');
+var HttpStatus = require('http-status');
 
 /**
  * UserController
  */
-class UserController extends BaseController {
+module.exports = class UserController extends BaseController {
+  constructor() {
+    super();
+  }
+
   index(req, res) {
     res.render('users/index', { title: 'users' })
   }
@@ -23,6 +28,21 @@ class UserController extends BaseController {
       return res.render('users/login', { title: 'login', users: JSON.stringify(users) });
     });
   }
-};
 
-module.exports = new UserController();
+  authenticate(req, res, next) {
+    req.app.get('passport').authenticate('local', function(err, user, info) {
+      if (err) {
+        return res.json(err);
+      }
+      if (!user) {
+        console.log(info);
+        return res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
+      }
+
+      //TODO: return JWT
+      return res.send('ok');
+    })(req, res, next);
+  }
+};
