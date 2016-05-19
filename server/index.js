@@ -3,6 +3,7 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var Sequelize  = require('sequelize');
 var passport   = require('passport');
+var log4js     = require('log4js');
 var app = express();
 
 /**
@@ -15,7 +16,7 @@ var mode = process.env.NODE_ENV || 'development';
  */
 var config = {
   //config:         require('../config/config'),
-  //logger: require('../config/logger'),
+  logger:         require('../config/logger'),
   database:       require('../config/database'),
   authentication: require('../config/authentication'),
   //oauthProviders: require('../config/oauth-providers'),
@@ -25,11 +26,14 @@ app.set('config', config);
 /**
  * TODO: start logger
  */
+log4js.configure(config.logger);
+var logger = log4js.getLogger();
 
 /**
  * middleware
  * configuration
  */
+app.use(log4js.connectLogger(logger, { level: 'auto' }));
 app.use('/assets', express.static(__dirname + '/../public/assets'));
 app.use('/favicon.ico', express.static(__dirname + '/../public/favicon.ico'))
 app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
