@@ -1,8 +1,3 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var JwtStrategy = require('passport-jwt').Strategy;
-//TODO: var ExtractJwt =
-
 /**
  * UserController
  */
