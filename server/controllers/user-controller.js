@@ -1,6 +1,7 @@
 'use strict';
 var BaseController = require('./base-controller');
-var HttpStatus = require('http-status');
+var HttpStatus     = require('http-status');
+var jwt            = require('jsonwebtoken');
 
 /**
  * UserController
@@ -18,31 +19,48 @@ module.exports = class UserController extends BaseController {
     res.render('users/login', { title: 'ログイン' })
   }
 
-  //TODO: remove this method
-  check(req, res) {
-    var User = req.app.get('models').User;
-
-    User.findOne({uid: 'example01'}).then(function(users) {
-      //if (err) { return res.json(err); }
-      if (!users) { return res.json({ message: 'not found' }); }
-      return res.render('users/login', { title: 'login', users: JSON.stringify(users) });
-    });
+  //TODO: remove
+  //this is only for JWT verify test
+  needJwtRoute(req, res) {
+    res.render('users/index', { title: 'JWT' })
   }
 
-  authenticate(req, res, next) {
-    req.app.get('passport').authenticate('local', function(err, user, info) {
+  /**
+   * authenticate methods
+   */
+  authenticateByPassword(req, res, next) {
+    var config    = req.app.get('config');
+    var jwtConfig = config.authentication.JWT;
+    var passport  = req.app.get('passport');
+
+    //FIXME: too much logic in controller!
+    passport.authenticate('local', function(err, user, info) {
       if (err) {
         return res.json(err);
       }
+
       if (!user) {
-        console.log(info);
         return res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
       }
 
-      //TODO: return JWT
-      return res.send('ok');
+      //TODO: remove unneccesary value from user and add JWT optionals in Strategy
+      jwt.sign(user.toJSON(), jwtConfig.secretOrKey, jwtConfig.options, function(err, token) {
+        if (err) {
+          return res.json(err);
+        }
+        return res.json({ JWT: token });
+      });
     })(req, res, next);
+  }
+
+  authenticateByJWT(req, res, next) {
+    var passport  = req.app.get('passport');
+    passport.authenticate('jwt', { session: false })(req, res, next);
+  }
+
+  authenticateByProvider(req, res, next) {
+
   }
 };

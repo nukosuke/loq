@@ -24,6 +24,7 @@ module.exports = function(app, passport, config) {
       // enable authentication by both uid and email
       var select = (identifier.indexOf('@') != -1) ? { email: identifier } : { uid: identifier };
 
+      //TODO: fetch only ['id', 'scope']
       User.findOne({ where: select }).then(function(user) {
         //TODO: password validation method in User model
         if (!user) { //|| !user.validatePassword(password)) {
@@ -38,10 +39,19 @@ module.exports = function(app, passport, config) {
    * Json Web Token Strategy
    * used to all API access except first JWT request
    */
+  var jwtConfig = config.authentication.JWT;
   passport.use(new JwtStrategy(
-    config.authentication.JWT,
-    function(jwtPayload, done) {
-      User.findOne({ where: { uid: jwtPayload.sub } }).then(function(user) {
+    {
+      secretOrKey:    jwtConfig.secretOrKey,
+      jwtFromRequest: jwtConfig.jwtFromRequest,
+      issuer:         jwtConfig.options.issuer,
+      audience:       jwtConfig.options.audience,
+      algorithms:     [jwtConfig.options.algorithm],
+    },
+    function(payload, done) {
+      var User = app.get('models').User;
+
+      User.findOne({ where: { uid: payload.uid } }).then(function(user) {
         if (user) {
           done(null, user);
         } else {
@@ -51,4 +61,13 @@ module.exports = function(app, passport, config) {
       });
     }
   ));
+
+
+  //TODO: rename this file to authenticator.js
+  //TODO:
+  //return authenticator;
+  //authenticator = {
+  // local: passport.authenticate('local'),
+  // jwt: passport.authenticate('jwt'),
+  //}
 };
