@@ -5,7 +5,7 @@ import ReactRouter from 'react-router'
 /**
  * App for Login and SignUp
  */
-class UserSignInUpApp extends React.Component {
+class UserSignApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,4 +22,4 @@ class UserSignInUpApp extends React.Component {
   }
 }
 
-ReactDOM.render(<UserLoginApp/>, document.getElementById('app'));
+ReactDOM.render(<UserSignApp/>, document.getElementById('app'));

@@ -6,7 +6,7 @@
 module.exports = function(controllers) {
   var router = require('express').Router();
 
-  router.get('/login', controllers.user.login);
+  router.get('/login', controllers.user.sign);
   router.post('/authenticate/token', controllers.user.authenticateByPassword);
 
   router.get(
