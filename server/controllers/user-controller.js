@@ -1,6 +1,7 @@
 'use strict';
 var BaseController = require('./base-controller');
-var HttpStatus = require('http-status');
+var HttpStatus     = require('http-status');
+var jwt            = require('jsonwebtoken');
 
 /**
  * UserController
@@ -23,14 +24,21 @@ module.exports = class UserController extends BaseController {
       if (err) {
         return res.json(err);
       }
+
       if (!user) {
         return res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
       }
 
-      //TODO: return JWT
-      return res.send('ok');
+      //TODO: remove unneccesary value from user and add JWT optionals
+      //TODO: config.authenticate.JWT.secretOrKey
+      jwt.sign(user.toJSON(), 'seeeecreeeeet!', {}, function(err, token) {
+        if (err) {
+          return res.json(err);
+        }
+        return res.json({ JWT: token });
+      });
     })(req, res, next);
   }
 };
