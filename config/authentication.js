@@ -12,8 +12,13 @@ module.exports = {
   JWT: {
     jwtFromRequest: require('passport-jwt').ExtractJwt.fromAuthHeader(),
     secretOrKey: 'secret',
-    issuer: process.env.JWT_ISSUER,
-    audience: process.env.JWT_AUDIENCE,
+    // secretOrKey: fs.readFileSync('private.key'),
+    options: {
+      algorithm: 'HS256',
+      expiresIn: '2 days',
+      audience:  process.env.JWT_AUDIENCE,
+      issuer:    process.env.JWT_ISSUER,
+    },
   },
 
   /**

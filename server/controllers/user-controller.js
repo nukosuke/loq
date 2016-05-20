@@ -20,7 +20,11 @@ module.exports = class UserController extends BaseController {
   }
 
   authenticate(req, res, next) {
-    req.app.get('passport').authenticate('local', function(err, user, info) {
+    var config    = req.app.get('config');
+    var jwtConfig = config.authentication.JWT;
+    var passport  = req.app.get('passport');
+
+    passport.authenticate('local', function(err, user, info) {
       if (err) {
         return res.json(err);
       }
@@ -31,9 +35,8 @@ module.exports = class UserController extends BaseController {
         .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
       }
 
-      //TODO: remove unneccesary value from user and add JWT optionals
-      //TODO: config.authenticate.JWT.secretOrKey
-      jwt.sign(user.toJSON(), 'seeeecreeeeet!', {}, function(err, token) {
+      //TODO: remove unneccesary value from user and add JWT optionals in Strategy
+      jwt.sign(user.toJSON(), jwtConfig.secretOrKey, jwtConfig.options, function(err, token) {
         if (err) {
           return res.json(err);
         }
