@@ -24,7 +24,6 @@ module.exports = class UserController extends BaseController {
         return res.json(err);
       }
       if (!user) {
-        console.log(info);
         return res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
