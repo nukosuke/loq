@@ -50,10 +50,9 @@ module.exports = function(app, passport, config) {
     },
     function(payload, done) {
       var User = app.get('models').User;
-      
+
       User.findOne({ where: { uid: payload.uid } }).then(function(user) {
         if (user) {
-          console.log(user);
           done(null, user);
         } else {
           done(null, false);
