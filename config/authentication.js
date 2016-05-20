@@ -22,20 +22,35 @@ module.exports = {
   },
 
   /**
-   * OAuth providers
+   * Identity Providers
    */
    providers: {
-     twitter: {
-       //TODO:
+     /**
+      * NO support for OAuth 1.x
+      * Use 2.0 instead.
+      */
+     oauth: {
+       twitter: {
+       },
+       /* and more providers
+       facebook: {
+       },
+       google: {
+       },
+       github: {
+       },
+       */
      },
-     facebook: {
-       //TODO:
-     },
-     /* and additional providers
-     github: {
 
+     openid: {
+       /**
+        * NO support for OpenID Authentication 2.0 which has been deprecated.
+        * Use OpenID Connect instead.
+        */
+       connect: {
+
+       },
      },
-     */
   }
 
 };
