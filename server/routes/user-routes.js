@@ -6,9 +6,6 @@
 module.exports = function(controllers) {
   var router = require('express').Router();
 
-  //TODO: remove this
-  router.get('/check', controllers.user.check);
-
   router.get('/', controllers.user.index);
   //router.get('/:username', controller.show);
 
