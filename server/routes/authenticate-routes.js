@@ -7,8 +7,13 @@ module.exports = function(controllers) {
   var router = require('express').Router();
 
   router.get('/login', controllers.user.login);
-  router.post('/authenticate/token', controllers.user.authenticate);
+  router.post('/authenticate/token', controllers.user.authenticateByPassword);
 
+  router.get(
+    '/jwtTest',
+    controllers.user.authenticateByJWT,
+    controllers.user.needJwtRoute
+  );
   //TODO:
   //twitter & facebook & github strategy
   //var existProvider = function(req, res) { req.params.provider in providers ? }

@@ -19,11 +19,21 @@ module.exports = class UserController extends BaseController {
     res.render('users/login', { title: 'ログイン' })
   }
 
-  authenticate(req, res, next) {
+  //TODO: remove
+  //this is only for JWT verify test
+  needJwtRoute(req, res) {
+    res.render('users/index', { title: 'JWT' })
+  }
+
+  /**
+   * authenticate methods
+   */
+  authenticateByPassword(req, res, next) {
     var config    = req.app.get('config');
     var jwtConfig = config.authentication.JWT;
     var passport  = req.app.get('passport');
 
+    //FIXME: too much logic in controller!
     passport.authenticate('local', function(err, user, info) {
       if (err) {
         return res.json(err);
@@ -43,5 +53,14 @@ module.exports = class UserController extends BaseController {
         return res.json({ JWT: token });
       });
     })(req, res, next);
+  }
+
+  authenticateByJWT(req, res, next) {
+    var passport  = req.app.get('passport');
+    passport.authenticate('jwt', { session: false })(req, res, next);
+  }
+
+  authenticateByProvider(req, res, next) {
+
   }
 };
