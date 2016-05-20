@@ -2,6 +2,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a137b76481224bec80264809dcd09054)](https://www.codacy.com/app/nukosuke/loq?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nukosuke/loq&amp;utm_campaign=Badge_Grade)
 [![Stories in Ready](https://badge.waffle.io/nukosuke/loq.png?label=ready&title=Ready)](https://waffle.io/nukosuke/loq)
 
+![loq](https://cloud.githubusercontent.com/assets/17716649/15415712/8f93913e-1e7f-11e6-8492-60081a58df85.jpg)
+
 # loq
 loq is a blogging system.
 It is developping stage yet.
