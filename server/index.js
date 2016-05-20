@@ -63,10 +63,11 @@ app.set('models', models);
  * create controller
  * instances
  */
-var UserController = require('./controllers/user-controller');
+var PageController  = require('./controllers/page-controller');
+var UserController  = require('./controllers/user-controller');
 var AdminController = require('./controllers/admin-controller');
 var controllers = {
-  //TODO: move controllers creation from each class definition file
+  page:  new PageController(),
   user:  new UserController(),
   admin: new AdminController(),
 };
@@ -76,9 +77,11 @@ app.set('controllers', controllers);
  * routing middleware
  * configuration
  */
+var pageRouter  = require('./routes/page-routes')(controllers);
 var authRouter  = require('./routes/authenticate-routes')(controllers);
 var userRouter  = require('./routes/user-routes')(controllers);
 var adminRouter = require('./routes/admin-routes')(controllers);
+app.use(pageRouter);
 app.use(authRouter);
 app.use('/users', userRouter);
 app.use('/admin', adminRouter);
