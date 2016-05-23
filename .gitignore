@@ -34,4 +34,5 @@ node_modules
 
 # assets output directory
 public/assets
+!public/assets/images
 db/*.db
