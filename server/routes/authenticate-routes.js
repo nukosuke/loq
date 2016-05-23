@@ -6,8 +6,11 @@
 module.exports = function(controllers) {
   var router = require('express').Router();
 
-  router.get('/login', controllers.user.login);
+  router.get('/authenticate(/*)?', controllers.user.sign);
+
+  //TODO: create AuthController
   router.post('/authenticate/token', controllers.user.authenticateByPassword);
+  router.delete('/authenticate/token', (req, res) => res.json({message: 'not implemented'}));
 
   router.get(
     '/jwtTest',

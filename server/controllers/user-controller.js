@@ -12,17 +12,17 @@ module.exports = class UserController extends BaseController {
   }
 
   index(req, res) {
-    res.render('users/index', { title: 'users' })
+    return res.render('users/index', { title: 'users' });
   }
 
-  login(req, res) {
-    res.render('users/login', { title: 'ログイン' })
+  sign(req, res) {
+    return res.render('users/sign', { title: 'welcome to loq!' });
   }
 
   //TODO: remove
   //this is only for JWT verify test
   needJwtRoute(req, res) {
-    res.render('users/index', { title: 'JWT' })
+    return res.render('users/index', { title: 'JWT' });
   }
 
   /**

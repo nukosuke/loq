@@ -4,9 +4,10 @@ var cwd     = process.cwd();
 
 module.exports = {
   entry: {
-    admin: './client/javascripts/admin/admin.jsx',
-    users: './client/javascripts/users/users.jsx',
-    posts: './client/javascripts/posts/posts.jsx',
+    'admin': './client/javascripts/admin/admin.jsx',
+    'users': './client/javascripts/users/users.jsx',
+    'users-sign': './client/javascripts/users/users-sign.jsx',
+    'posts': './client/javascripts/posts/posts.jsx',
   },
   output: {
     path: path.join(__dirname, 'public/assets/javascripts'),
