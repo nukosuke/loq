@@ -57,9 +57,12 @@ export function signIn(identifier, password) {
       }),
     })
     .then(response => response.json())
-    .then(json => dispatch(responseSignIn(json)))
-    //TODO: store JWT in localStorage
-    // and redirect to logined page
+    .then(json => {
+      dispatch(responseSignIn(json))
+      return json.JWT
+    })
+    .then(JWT => localStorage.setItem('JWT', JWT))
+    //TODO: redirect to logined page
   }
 }
 
