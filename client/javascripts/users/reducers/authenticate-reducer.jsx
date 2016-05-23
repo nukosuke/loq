@@ -15,12 +15,10 @@ import {
 
 const initialState = {
   requesting: false,
-  auth: {
-    JWT: (localStorage.getItem('JWT') || ''),
-    signedin_as: {
-      uid:  '',
-      name: '',
-    },
+  JWT: (localStorage.getItem('JWT') || ''),
+  signedin_as: {
+    uid:  '',
+    name: '',
   },
 }
 
@@ -34,7 +32,7 @@ function authenticator(state = initialState, action) {
     case RESPONSE_SIGN_IN:
       return Object.assign({}, state, {
         requesting: false,
-        auth: action.response,
+        JWT: action.response.JWT,
       })
 
     case REQUEST_SIGN_OUT:
@@ -49,12 +47,32 @@ function authenticator(state = initialState, action) {
       })
 
     default:
-      return state;
+      return state
   }
-};
+}
+
+/*
+export function userCreator(state = initialState, action) {
+  switch (action.type) {
+    case REQUEST_SIGN_UP:
+      return Object.assign({}, state, {
+        requesting: true
+      })
+
+    case RESPONSE_SIGN_UP:
+      return Object.assign({}, state, {
+        requesting: false,
+      })
+
+    default:
+      return state
+  }
+}
+*/
 
 const authenticateReducer = combineReducers({
   authenticator,
+  //userCreator,
 })
 
 export default authenticateReducer
