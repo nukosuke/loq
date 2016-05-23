@@ -4,11 +4,9 @@ import { connect } from 'react-redux'
 import { signIn } from '../actions/authenticate-actions'
 
 class UserSignInForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
+    const { auth } = this.props
+
     return (
       <div id='user-sign-in-form'>
         <form id='sign-in-form'>
@@ -36,15 +34,16 @@ class UserSignInForm extends Component {
   }
 }
 
+/*TODO:
 UserSignInForm.propTypes = {
 }
 
 UserSignInForm.defaultProps = {
 }
+*/
 
 export default connect(
   state => ({
-    requesting: state.requesting,
-    auth: state.auth,
+    auth: state.authenticator,
   })
 )(UserSignInForm)

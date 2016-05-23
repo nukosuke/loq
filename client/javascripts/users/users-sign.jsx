@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
-import ReactRouter from 'react-router'
+import { useRouterHistory, Router, Route, Redirect, Link } from 'react-router'
+import { createHistory } from 'history'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
@@ -14,16 +15,18 @@ import reducer from './reducers/authenticate-reducer'
 class UserSignApp extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      requesting: false,
-      auth: {},
-    }
   }
 
   render() {
     return (
-      <div id='authenticate-form'>
-        <UserSignInForm />
+      <div id='user-sign-app'>
+        <ul>
+          <li><Link to='/signin'>sign in</Link></li>
+          <li><Link to='/signup'>sign up</Link></li>
+        </ul>
+        <div id='authenticate-form'>
+          {this.props.children}
+        </div>
       </div>
     )
   }
@@ -31,9 +34,20 @@ class UserSignApp extends Component {
 
 const store = createStore(reducer, applyMiddleware(ReduxThunk))
 
+const history = useRouterHistory(createHistory)({
+  basename: '/authenticate'
+})
+
 render(
   <Provider store={store}>
-    <UserSignApp />
+    <Router history={history}>
+      <Redirect from='' to='signin' />
+      <Redirect from='/' to='signin' />
+      <Route path='/' component={UserSignApp}>
+        <Route name='signin' path='signin' component={UserSignInForm} />
+        <Route name='signup' path='signup' component={UserSignUpForm} />
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('app')
 )
