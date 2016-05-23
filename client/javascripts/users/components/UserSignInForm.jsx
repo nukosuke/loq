@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { signin } from '../actions/authenticate-actions'
+import { signIn } from '../actions/authenticate-actions'
 
 class UserSignInForm extends Component {
   constructor(props) {
@@ -10,11 +10,13 @@ class UserSignInForm extends Component {
 
   render() {
     return (
-      <form id='sign-in-form'>
-        <input type='text'     ref='identifier' placeholder='ID or email' />
-        <input type='password' ref='password'   placeholder='password' />
-        <button onClick={e => this.handleClick(e)}>LOGIN</button>
-      </form>
+      <div id='user-sign-in-form'>
+        <form id='sign-in-form'>
+          <input type='text'     ref='identifier' placeholder='ID or email' />
+          <input type='password' ref='password'   placeholder='password' />
+          <button onClick={e => this.handleClick(e)}>LOGIN</button>
+        </form>
+      </div>
     )
   }
 
@@ -27,7 +29,7 @@ class UserSignInForm extends Component {
     const identifier = identifierNode.value.trim()
     const password   = passwordNode.value
 
-    dispatch(signin(identifier, password))
+    dispatch(signIn(identifier, password))
 
     identifierNode.value = ''
     passwordNode.value   = ''
@@ -42,7 +44,7 @@ UserSignInForm.defaultProps = {
 
 export default connect(
   state => ({
-    JWT: state.JWT,
-    signedin_as: state.signedin_as,
+    requesting: state.requesting,
+    auth: state.auth,
   })
 )(UserSignInForm)

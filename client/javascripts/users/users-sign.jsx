@@ -14,6 +14,10 @@ import reducer from './reducers/authenticate-reducer'
 class UserSignApp extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      requesting: false,
+      auth: {},
+    }
   }
 
   render() {
