@@ -7,5 +7,7 @@
 ![loq](https://cloud.githubusercontent.com/assets/17716649/15415712/8f93913e-1e7f-11e6-8492-60081a58df85.jpg)
 
 # loq
+
+[![Join the chat at https://gitter.im/nukosuke/loq](https://badges.gitter.im/nukosuke/loq.svg)](https://gitter.im/nukosuke/loq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 loq is a blogging system.
 It is developping stage yet.
