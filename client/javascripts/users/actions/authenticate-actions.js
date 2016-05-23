@@ -67,8 +67,8 @@ export function signOut(JWT) {
   return (dispatch) => {
     dispatch(requestSignOut())
 
-    return fetch('/authenticate/token/destroy', {
-      method: 'POST',
+    return fetch('/authenticate/token', {
+      method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
