@@ -10,7 +10,7 @@ module.exports = function(controllers) {
 
   //TODO: create AuthController
   router.post('/authenticate/token', controllers.user.authenticateByPassword);
-  router.delete('/authenticate/token', (req, res) => res.json({'not implemented'}));
+  router.delete('/authenticate/token', (req, res) => res.json({message: 'not implemented'}));
 
   router.get(
     '/jwtTest',
