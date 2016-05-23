@@ -1,37 +1,35 @@
-import React       from 'react'
-import ReactDOM    from 'react-dom'
+import React, { Component, PropTypes } from 'react'
+import { render } from 'react-dom'
 import ReactRouter from 'react-router'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import ReduxThunk from 'redux-thunk'
+import UserSignInForm from './components/UserSignInForm'
+import UserSignUpForm from './components/UserSignUpForm'
+import reducer from './reducers/authenticate-reducer'
 
 /**
  * App for Login and SignUp
  */
-class UserSignApp extends React.Component {
+class UserSignApp extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-
-    };
+    super(props)
   }
 
   render() {
     return (
-      <div>
-        <form id='sign-in-form'>
-          <input type='text'     name='identifier' placeholder='ID or email' />
-          <input type='password' name='password'   placeholder='password' />
-          <button>LOGIN</button>
-        </form>
-
-        <form id='sign-up-form'>
-          <input type='text'     name='user[name]'             placeholder='ID' />
-          <input type='text'     name='user[email]'            placeholder='email address' />
-          <input type='password' name='user[password]'         placeholder='password' />
-          <input type='password' name='user[password_confirm]' placeholder='password again' />
-          <button>SIGNUP</button>
-        </form>
+      <div id='authenticate-form'>
+        <UserSignInForm />
       </div>
-    );
+    )
   }
 }
 
-ReactDOM.render(<UserSignApp/>, document.getElementById('app'));
+const store = createStore(reducer, applyMiddleware(ReduxThunk))
+
+render(
+  <Provider store={store}>
+    <UserSignApp />
+  </Provider>,
+  document.getElementById('app')
+)
