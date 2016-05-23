@@ -33,6 +33,5 @@ node_modules
 .node_repl_history
 
 # assets output directory
-public/assets
-!public/assets/images
+public/assets/javascripts
 db/*.db
