@@ -1,6 +1,5 @@
 'use strict'
 
-import { combineReducers } from 'redux'
 import {
   PASSWORD_CONFIRM,
   REQUEST_SIGN_UP,
