@@ -3,6 +3,11 @@ node_js:
   - "6"
   - "5"
   - "4"
+addons:
+  sources:
+    - ubuntu-toolchain-r-test
+  packages:
+    - g++-4.8
 env:
   - CXX=g++-4.8
 notifications:
