@@ -14,10 +14,6 @@ import signUpReducer from './reducers/signup-reducer'
  * App for Login and SignUp
  */
 class UserSignApp extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div id='user-sign-app'>
@@ -33,16 +29,28 @@ class UserSignApp extends Component {
   }
 }
 
+/**
+ * authenticate page uses sign-in and sign-up actions
+ * these reducers return new state as props by `Redux.connect`
+ */
 const reducer = combineReducers({
   signInReducer,
   signUpReducer,
 })
 
+/**
+ * create store
+ * ReduxThunk is middleware for asyncronous process
+ */
 const store = createStore(reducer, applyMiddleware(ReduxThunk))
 
+/**
+ * `/authenticate` is server side route by Express
+ */
 const history = useRouterHistory(createHistory)({
   basename: '/authenticate'
 })
+
 
 render(
   <Provider store={store}>
