@@ -3,25 +3,28 @@ module.exports = {
   up: function(queryInterface, Sequelize) {
     queryInterface.createTable('Users', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
       uid: {
+        type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
-        type: Sequelize.STRING
       },
       email: {
+        type: Sequelize.STRING,
+        unique: true,
         allowNull: false,
-        type: Sequelize.STRING
       },
       password_hash: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
       },
       avatar: {
         type: Sequelize.STRING
@@ -41,13 +44,13 @@ module.exports = {
       url: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
       }
     });
     return queryInterface.addIndex('Users', ['uid', 'email']);
