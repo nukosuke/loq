@@ -1,5 +1,5 @@
 /**
- * authenticate actions
+ * actions for sign-in and sign-out
  */
 'use strict';
 import 'whatwg-fetch'
@@ -79,6 +79,10 @@ export function signOut(JWT) {
       body: JSON.stringify({ JWT }),
     })
     .then(response => response.json())
+    .then(json => {
+      localStorage.removeItem('JWT')
+      return json
+    })
     .then(json => dispatch(responseSignOut(json)))
   }
 }
