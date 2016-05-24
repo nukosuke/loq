@@ -22,7 +22,7 @@ const initialState = {
   },
 }
 
-function authenticator(state = initialState, action) {
+export default function signInReducer(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SIGN_IN:
       return Object.assign({}, state, {
@@ -34,6 +34,7 @@ function authenticator(state = initialState, action) {
         requesting: false,
         JWT: action.response.JWT,
       })
+      //TODO: failure時の処理
 
     case REQUEST_SIGN_OUT:
       return Object.assign({}, state, {
@@ -43,36 +44,10 @@ function authenticator(state = initialState, action) {
     case RESPONSE_SIGN_OUT:
       return Object.assign({}, state, {
         requesting: false,
-        auth: action.response,
+        JWT: '',
       })
 
     default:
       return state
   }
 }
-
-/*
-export function userCreator(state = initialState, action) {
-  switch (action.type) {
-    case REQUEST_SIGN_UP:
-      return Object.assign({}, state, {
-        requesting: true
-      })
-
-    case RESPONSE_SIGN_UP:
-      return Object.assign({}, state, {
-        requesting: false,
-      })
-
-    default:
-      return state
-  }
-}
-*/
-
-const authenticateReducer = combineReducers({
-  authenticator,
-  //userCreator,
-})
-
-export default authenticateReducer
