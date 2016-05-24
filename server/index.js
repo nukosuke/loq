@@ -19,7 +19,6 @@ var config = {
   logger:         require('../config/logger'),
   database:       require('../config/database'),
   authentication: require('../config/authentication'),
-  //oauthProviders: require('../config/oauth-providers'),
 };
 app.set('config', config);
 
