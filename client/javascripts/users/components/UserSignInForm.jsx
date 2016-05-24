@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { signIn } from '../actions/authenticate-actions'
+import { signIn } from '../actions/signin-actions'
 
 class UserSignInForm extends Component {
   render() {

@@ -9,7 +9,7 @@ import {
   RESPONSE_SIGN_IN,
   REQUEST_SIGN_OUT,
   RESPONSE_SIGN_OUT
-} from '../actions/authenticate-actions'
+} from '../actions/signin-actions'
 
 
 const initialState = {

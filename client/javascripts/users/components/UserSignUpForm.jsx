@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { signUp } from '../actions/authenticate-actions'
+import { signUp } from '../actions/signup-actions'
 
 /**
  * Sign Up form for new user
@@ -36,6 +36,6 @@ UserSignUpForm.defaultProps = {
 
 export default connect(
   state => ({
-    signup: state.authenticator,
+    signup: state.signUpReducer,
   })
 )(UserSignUpForm)

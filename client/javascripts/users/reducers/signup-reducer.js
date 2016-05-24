@@ -5,7 +5,7 @@ import {
   PASSWORD_CONFIRM,
   REQUEST_SIGN_UP,
   RESPONSE_SIGN_UP
-} from '../actions/authenticate-actions'
+} from '../actions/signup-actions'
 
 const initialState = {
   JWT: (localStorage.getItem('JWT') || '')
