@@ -9,6 +9,11 @@ export const RESPONSE_SIGN_IN  = 'RESPONSE_SIGN_IN'
 export const REQUEST_SIGN_OUT  = 'REQUEST_SIGN_OUT'
 export const RESPONSE_SIGN_OUT = 'RESPONSE_SIGN_OUT'
 
+export const PASSWORD_CONFIRM  = 'PASSWORD_CONFIRM'
+export const REQUEST_SIGN_UP   = 'REQUEST_SIGN_UP'
+export const RESPONSE_SIGN_UP  = 'RESPONSE_SIGN_UP'
+
+
 /**
  * action creators
  */
@@ -34,6 +39,33 @@ export function requestSignOut() {
 export function responseSignOut(response) {
   return {
     type: RESPONSE_SIGN_OUT,
+    response
+  }
+}
+
+export function passwordConfirmFailure() {
+  return {
+    type: PASSWORD_CONFIRM,
+    error: 'CONFIRM_FAILURE',
+  }
+}
+
+export function passwordConfirmSuccess() {
+  return {
+    type: PASSWORD_CONFIRM,
+    error: 'CONFIRM_SUCCESS',
+  }
+}
+
+export function requestSignUp() {
+  return {
+    type: REQUEST_SIGN_UP,
+  }
+}
+
+export function responseSignUp(response) {
+  return {
+    type: RESPONSE_SIGN_UP,
     response
   }
 }
@@ -79,6 +111,10 @@ export function signOut(JWT) {
       body: JSON.stringify({ JWT }),
     })
     .then(response => response.json())
+    .then(json => {
+      localStorage.removeItem('JWT')
+      return json
+    })
     .then(json => dispatch(responseSignOut(json)))
   }
 }

@@ -4,7 +4,6 @@
  */
 'use strict';
 
-import { combineReducers } from 'redux'
 import {
   REQUEST_SIGN_IN,
   RESPONSE_SIGN_IN,
