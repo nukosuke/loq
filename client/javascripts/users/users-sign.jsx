@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
 import UserSignInForm from './components/UserSignInForm'
 import UserSignUpForm from './components/UserSignUpForm'
-import reducer from './reducers/authenticate-reducer'
+import signInReducer from './reducers/signin-reducer'
+import signUpReducer from './reducers/signup-reducer'
 
 /**
  * App for Login and SignUp
@@ -31,6 +32,11 @@ class UserSignApp extends Component {
     )
   }
 }
+
+const reducer = combineReducers({
+  signInReducer,
+  signUpReducer,
+})
 
 const store = createStore(reducer, applyMiddleware(ReduxThunk))
 

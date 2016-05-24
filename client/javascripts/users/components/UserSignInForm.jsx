@@ -5,14 +5,14 @@ import { signIn } from '../actions/authenticate-actions'
 
 class UserSignInForm extends Component {
   render() {
-    const { auth } = this.props
+    const { signin } = this.props
 
     return (
       <div id='user-sign-in-form'>
         <form id='sign-in-form'>
           <input type='text'     ref='identifier' placeholder='ID or email' />
           <input type='password' ref='password'   placeholder='password' />
-          <button onClick={e => this.handleClick(e)}>LOGIN</button>
+          <button onClick={ e => this.handleClick(e) }>LOGIN</button>
         </form>
       </div>
     )
@@ -44,6 +44,6 @@ UserSignInForm.defaultProps = {
 
 export default connect(
   state => ({
-    auth: state.authenticator,
+    signin: state.signInReducer,
   })
 )(UserSignInForm)
