@@ -3,10 +3,10 @@
 /**
  * authenticate routes
  */
-module.exports = function(controllers) {
+module.exports = function(controllers) { //TODO: (controllers, middlewares)
   var router = require('express').Router();
 
-  router.get('/authenticate(/*)?', controllers.user.sign);
+  router.get('/authenticate(/*)?', controllers.user.authenticate);
 
   //TODO: create AuthController
   router.post('/authenticate/token', controllers.user.authenticateByPassword);

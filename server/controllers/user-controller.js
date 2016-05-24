@@ -15,8 +15,8 @@ module.exports = class UserController extends BaseController {
     return res.render('users/index', { title: 'users' });
   }
 
-  sign(req, res) {
-    return res.render('users/sign', { title: 'welcome to loq!' });
+  authenticate(req, res) {
+    return res.render('users/authenticate', { title: 'welcome to loq!' });
   }
 
   //TODO: remove
