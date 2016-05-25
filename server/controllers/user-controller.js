@@ -42,15 +42,27 @@ module.exports = class UserController extends BaseController {
       if (!user) {
         return res
         .status(HttpStatus.UNAUTHORIZED)
-        .json({ error: HttpStatus[HttpStatus.UNAUTHORIZED] });
+        .json({
+          status: HttpStatus.UNAUTHORIZED,
+          message: HttpStatus[HttpStatus.UNAUTHORIZED]
+        });
       }
 
       //TODO: remove unneccesary value from user and add JWT optionals in Strategy
       jwt.sign(user.toJSON(), jwtConfig.secretOrKey, jwtConfig.options, function(err, token) {
         if (err) {
-          return res.json(err);
+          return res
+          .status(HttpStatus.UNAUTHORIZED)
+          .json({
+            status: HttpStatus.UNAUTHORIZED,
+            message: HttpStatus[HttpStatus.UNAUTHORIZED]
+          });
         }
-        return res.json({ JWT: token });
+        return res.json({
+          status: HttpStatus.OK,
+          message: HttpStatus[HttpStatus.OK],
+          JWT: token,
+        });
       });
     })(req, res, next);
   }
