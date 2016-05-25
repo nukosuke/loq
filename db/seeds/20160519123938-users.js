@@ -6,7 +6,7 @@ module.exports = {
       id: 0,
       uid: 'example01',
       email: 'example01@example.com',
-      password_hash: '',
+      password_hash: '$2a$10$nKFe8iKgeTiuCHxtVLGyReENIFr7527NpJSb/5ri/lD6PzR4nssUe', //example01
       name: 'example01',
       bio: 'hello, I am first user of this service. yay!',
       created_at: new Date(),
