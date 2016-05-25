@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/nukosuke/loq#readme",
   "dependencies": {
+    "bcrypt": "^0.8.6",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "history": "^2.1.1",

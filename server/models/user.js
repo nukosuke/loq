@@ -1,5 +1,25 @@
 'use strict';
+var bcrypt = require('bcrypt');
+
 module.exports = function(sequelize, DataTypes) {
+  /**
+   * for asyncronous hashing
+   * use beforeCreate & beforeUpdate hooks
+   */
+  var hashPasswordHook = function(user, options, callback) {
+    bcrypt.hash(user.get('password'), 10, function(err, hash) {
+      if (err) {
+        return callback(err);
+      }
+
+      user.set('password_hash', hash);
+      return callback(null, options);
+    });
+  };
+
+  /**
+   * User model definition
+   */
   var User = sequelize.define('User', {
     uid: {
       type: DataTypes.STRING,
@@ -13,28 +33,26 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false,
       validate: {
         isEmail: true,
-        notNull: true,
         notEmpty: true,
       },
     },
-    password_hash: DataTypes.STRING,
+    password_hash: {
+      type: DataTypes.STRING,
+    },
     password: {
       type: DataTypes.VIRTUAL,
-      set: function(value) {
-        this.setDataValue('password', value);
-        this.setDataValue('password_hash', this.salt + value)
-      },
       validate: {
         min: 8,
         max: 32,
-      }
+      },
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
         max: 16,
       },
@@ -66,11 +84,22 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
   }, {
+    underscored: true,
+    hooks: {
+      beforeCreate: hashPasswordHook,
+      beforeUpdate: hashPasswordHook,
+    },
     classMethods: {
       associate: function(models) {
         // associations can be defined here
       }
-    }
+    },
+    instanceMethods: {
+      authenticate: function(password) {
+        //TODO:
+        return true;
+      },
+    },
   });
   return User;
 };
