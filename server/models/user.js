@@ -95,9 +95,14 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     instanceMethods: {
-      authenticate: function(password) {
-        //TODO:
-        return true;
+      authenticate: function(password, callback) {
+        bcrypt.compare(password, this.password_hash, function(err, isValid) {
+          if (err) {
+            return callback(err);
+          } else {
+            return callback(null, isValid);
+          }
+        });
       },
     },
   });
