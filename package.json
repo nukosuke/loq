@@ -27,7 +27,6 @@
     "express": "^4.13.4",
     "history": "^2.1.1",
     "http-status": "^0.2.2",
-    "jade": "^1.11.0",
     "jsonwebtoken": "^6.2.0",
     "log4js": "^0.6.36",
     "mysql": "^2.10.2",
