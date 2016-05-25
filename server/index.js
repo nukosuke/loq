@@ -37,7 +37,7 @@ app.use('/assets', express.static(__dirname + '/../public/assets'));
 app.use('/favicon.ico', express.static(__dirname + '/../public/favicon.ico'))
 app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
 app.set('views', __dirname+'/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
