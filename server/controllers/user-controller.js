@@ -19,16 +19,18 @@ module.exports = class UserController extends BaseController {
     return res.render('users/authenticate', { title: 'welcome to loq!' });
   }
 
-  //TODO: remove
-  //this is only for JWT verify test
-  needJwtRoute(req, res) {
-    return res.render('users/index', { title: 'JWT' });
+  show(req, res) {
+    return res.render('users/show', { title: 'users' });
+  }
+
+  settings(req, res) {
+    return res.render('users/settings', { title: 'user settings'});
   }
 
   /**
-   * authenticate methods
+   * authenticate and publish JWT
    */
-  authenticateByPassword(req, res, next) {
+  token(req, res, next) {
     var config    = req.app.get('config');
     var jwtConfig = config.authentication.JWT;
     var passport  = req.app.get('passport');
@@ -67,12 +69,14 @@ module.exports = class UserController extends BaseController {
     })(req, res, next);
   }
 
-  authenticateByJWT(req, res, next) {
+  requireJWT(req, res, next) {
     var passport  = req.app.get('passport');
     passport.authenticate('jwt', { session: false })(req, res, next);
   }
 
-  authenticateByProvider(req, res, next) {
-
-  }
+  /**
+   * TODO:
+   */
+  authProviderRedirect(req, res, next) {}
+  authProviderCallback(req, res, next) {}
 };
