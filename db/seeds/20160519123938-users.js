@@ -9,8 +9,8 @@ module.exports = {
       password_hash: '',
       name: 'example01',
       bio: 'hello, I am first user of this service. yay!',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
     }], {});
   },
 
