@@ -21,16 +21,27 @@ module.exports = function(app, passport, config) {
     },
     function(identifier, password, done) {
       var User = app.get('models').User;
-      // enable authentication by both uid and email
+
+      /**
+       * enable authentication by both uid and email
+       *TODO: this should be checked on client side
+       */
       var select = (identifier.indexOf('@') != -1) ? { email: identifier } : { uid: identifier };
 
       //TODO: fetch only ['id', 'scope']
       User.findOne({ where: select }).then(function(user) {
-        //TODO: password validation method in User model
-        if (!user) { //|| !user.validatePassword(password)) {
-          return done(null, false, { message: 'ユーザ名かパスワードが間違っています' })
+        if (!user) {
+          return done(null, false, { message: 'ユーザ名かパスワードが間違っています' });
         }
-        return done(null, user);
+        user.authenticate(password, function(err, isValid) {
+          if (err) {
+            return done(err);
+          }
+          if (!isValid) {
+            return done(null, false, { message: 'ユーザ名かパスワードが間違っています' });
+          }
+          return done(null, user);
+        });
       });
     }
   ));
@@ -62,8 +73,10 @@ module.exports = function(app, passport, config) {
     }
   ));
 
+  //TODO: passport OAuth, OpenID Connect
 
   //TODO: rename this file to authenticator.js
+  
   //TODO:
   //return authenticator;
   //authenticator = {
