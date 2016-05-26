@@ -62,7 +62,7 @@ export function signIn(identifier, password) {
       return json.JWT
     })
     .then(JWT => localStorage.setItem('JWT', JWT))
-    //TODO: redirect to logined page
+    .then(() => window.location.assign('/users'))
   }
 }
 
@@ -84,5 +84,6 @@ export function signOut(JWT) {
       return json
     })
     .then(json => dispatch(responseSignOut(json)))
+    .then(() => window.location('/authenticate/signin'))
   }
 }
