@@ -3,7 +3,7 @@
 /**
  * user routes
  */
-module.exports = function(controllers) {
+module.exports = function(controllers, middlewares) {
   var router = require('express').Router();
 
   router.get('/users', controllers.user.index);
@@ -13,7 +13,7 @@ module.exports = function(controllers) {
    * require authenticate
    */
   //router.get('/')
-  router.get('/settings', controllers.user.requireJWT, controllers.user.settings);
+  router.get('/settings', middlewares.authenticator.requireJWT, controllers.user.settings);
 
   /**
    * JSON API

@@ -3,7 +3,7 @@
 /**
  * authenticate routes
  */
-module.exports = function(controllers) { //TODO: (controllers, middlewares)
+module.exports = function(controllers) {
   var router = require('express').Router();
 
   router.get   ('/authenticate(/*)?' , controllers.user.authenticate);

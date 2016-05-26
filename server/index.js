@@ -1,8 +1,8 @@
 'use strict';
 var express    = require('express');
 var bodyParser = require('body-parser');
-var Sequelize  = require('sequelize');
 var passport   = require('passport');
+var Sequelize  = require('sequelize');
 var log4js     = require('log4js');
 var app = express();
 
@@ -25,7 +25,7 @@ var config = {
 app.set('config', config);
 
 /**
- * TODO: start logger
+ * create logger
  */
 log4js.configure(config.logger);
 var logger = log4js.getLogger();
@@ -48,12 +48,11 @@ app.use(passport.initialize());
  * authentication
  * configuration
  */
-require('./middlewares/passport')(app, passport);
-var jwt = require('jsonwebtoken');
+var Authenticator = require('./middlewares/passport');
+var authenticator = new Authenticator(app, passport);
 var httpStatus = require('http-status');
 var middlewares = {
-  passport,
-  jwt,
+  authenticator,
   httpStatus,
 };
 app.set('middlewares', middlewares);
@@ -91,7 +90,7 @@ app.set('controllers', controllers);
  */
 var pageRouter  = require('./routes/page-routes')(controllers);
 var authRouter  = require('./routes/authenticate-routes')(controllers);
-var userRouter  = require('./routes/user-routes')(controllers);
+var userRouter  = require('./routes/user-routes')(controllers, middlewares);
 var adminRouter = require('./routes/admin-routes')(controllers);
 app.use(pageRouter);
 app.use(authRouter);
