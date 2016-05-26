@@ -5,8 +5,14 @@ var ExtractJwt    = JwtStrategy.ExtractJwt;
 
 /**
  * passport configuration
+ *TODO: classify
  */
 module.exports = function(app, passport, config) {
+  //TODO:
+  //constructor(app, config, passport) {
+  //this.passport = passport
+  //
+  //
 
   /**
    * user authorize by (uid || email) and password
@@ -76,11 +82,15 @@ module.exports = function(app, passport, config) {
   //TODO: passport OAuth, OpenID Connect
 
   //TODO: rename this file to authenticator.js
-  
+
   //TODO:
   //return authenticator;
   //authenticator = {
   // local: passport.authenticate('local'),
   // jwt: passport.authenticate('jwt'),
   //}
+
+  //TODO:
+  //from UserController
+  //requireJWT(req, res, next) {}
 };
