@@ -49,7 +49,10 @@ app.use(passport.initialize());
  * configuration
  */
 require('./middlewares/passport')(app, passport, config);
-app.set('passport', passport);
+var middlewares = {
+  passport,
+};
+app.set('middlewares', middlewares);
 
 /**
  * define model schemas
@@ -69,7 +72,7 @@ var UserController  = require('./controllers/user-controller');
 var AdminController = require('./controllers/admin-controller');
 var controllers = {
   page:  new PageController(),
-  user:  new UserController(models),
+  user:  new UserController(app),
   admin: new AdminController(),
   //api: {
     //user: new ApiUserController(),
