@@ -4,6 +4,7 @@
  * base class of all controller classes
  */
 module.exports = class BaseController {
-  constructor() {
+  constructor(models) {
+    this.models = models || {};
   }
 };

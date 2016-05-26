@@ -7,8 +7,9 @@ var jwt            = require('jsonwebtoken');
  * UserController
  */
 module.exports = class UserController extends BaseController {
-  constructor() {
-    super();
+  constructor(models) {
+    super(models);
+    this.apiIndex = this.apiIndex.bind(this);
   }
 
   index(req, res) {
@@ -28,7 +29,8 @@ module.exports = class UserController extends BaseController {
   }
 
   /**
-   * authenticate and publish JWT
+   * API: authenticate and publish JWT
+   *TODO: move to api-user-controller.js
    */
   token(req, res, next) {
     var config    = req.app.get('config');
@@ -69,6 +71,19 @@ module.exports = class UserController extends BaseController {
     })(req, res, next);
   }
 
+  /**
+   * TODO: move into api-user-controller as index()
+   */
+  apiIndex(req, res) {
+    this.models.User.findAll().then(function(users) {
+      res.json(users);
+    });
+  }
+
+  /**
+   * authentication hook
+   *TODO: move to middlewares/authenticator.js
+   */
   requireJWT(req, res, next) {
     var passport  = req.app.get('passport');
     passport.authenticate('jwt', { session: false })(req, res, next);
