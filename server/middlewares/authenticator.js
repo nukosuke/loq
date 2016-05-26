@@ -91,7 +91,6 @@ module.exports = class Authenticator extends Middleware {
     var config    = this.config;
     var jwtConfig = config.authentication.JWT;
 
-    //FIXME: too much logic in controller!
     this.passport.authenticate('local', function(err, user, info) {
       if (err) {
         return res.json(err);
@@ -101,7 +100,6 @@ module.exports = class Authenticator extends Middleware {
         return res
         .status(httpStatus.UNAUTHORIZED)
         .json({
-          status: httpStatus.UNAUTHORIZED,
           message: httpStatus[httpStatus.UNAUTHORIZED]
         });
       }
@@ -112,12 +110,10 @@ module.exports = class Authenticator extends Middleware {
           return res
           .status(httpStatus.UNAUTHORIZED)
           .json({
-            status: httpStatus.UNAUTHORIZED,
             message: httpStatus[httpStatus.UNAUTHORIZED]
           });
         }
         return res.json({
-          status: httpStatus.OK,
           message: httpStatus[httpStatus.OK],
           JWT: token,
         });
