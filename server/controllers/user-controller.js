@@ -7,9 +7,11 @@ var jwt            = require('jsonwebtoken');
  * UserController
  */
 module.exports = class UserController extends BaseController {
-  constructor(models) {
-    super(models);
+  constructor(app) {
+    super(app);
     this.apiIndex = this.apiIndex.bind(this);
+    this.token = this.token.bind(this);
+    this.requireJWT = this.requireJWT.bind(this);
   }
 
   index(req, res) {
@@ -33,9 +35,9 @@ module.exports = class UserController extends BaseController {
    *TODO: move to api-user-controller.js
    */
   token(req, res, next) {
-    var config    = req.app.get('config');
+    var config    = this.config;
     var jwtConfig = config.authentication.JWT;
-    var passport  = req.app.get('passport');
+    var passport  = this.middlewares.passport;
 
     //FIXME: too much logic in controller!
     passport.authenticate('local', function(err, user, info) {
@@ -85,8 +87,7 @@ module.exports = class UserController extends BaseController {
    *TODO: move to middlewares/authenticator.js
    */
   requireJWT(req, res, next) {
-    var passport  = req.app.get('passport');
-    passport.authenticate('jwt', { session: false })(req, res, next);
+    this.middlewares.passport.authenticate('jwt', { session: false })(req, res, next);
   }
 
   /**
