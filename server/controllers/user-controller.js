@@ -7,8 +7,6 @@ var BaseController = require('./base-controller');
 module.exports = class UserController extends BaseController {
   constructor(app) {
     super(app);
-    this.apiIndex = this.apiIndex.bind(this);
-    this.token = this.token.bind(this);
     this.requireJWT = this.requireJWT.bind(this);
   }
 
