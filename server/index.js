@@ -49,8 +49,12 @@ app.use(passport.initialize());
  * configuration
  */
 require('./middlewares/passport')(app, passport, config);
+var jwt = require('jsonwebtoken');
+var httpStatus = require('http-status');
 var middlewares = {
   passport,
+  jwt,
+  httpStatus,
 };
 app.set('middlewares', middlewares);
 
@@ -70,13 +74,14 @@ app.set('models', models);
 var PageController  = require('./controllers/page-controller');
 var UserController  = require('./controllers/user-controller');
 var AdminController = require('./controllers/admin-controller');
+var ApiUserController = require('./controllers/api-user-controller');
 var controllers = {
-  page:  new PageController(),
+  page:  new PageController(app),
   user:  new UserController(app),
-  admin: new AdminController(),
-  //api: {
-    //user: new ApiUserController(),
-  //},
+  admin: new AdminController(app),
+  api: {
+    user: new ApiUserController(app),
+  },
 };
 app.set('controllers', controllers);
 
