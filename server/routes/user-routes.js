@@ -18,7 +18,7 @@ module.exports = function(controllers) {
   /**
    * JSON API
    */
-  router.get('/api/users', controllers.user.apiIndex);
+  router.get('/api/users', controllers.api.user.index);
   //router.post('/api/settings/profile', controllers.user.setting.updateProfile);
   //router.post('/api/settings/password', controllers.user.setting.updatePassword);
   //router.post('/api/settings/authenticate/:provider', controller.updateAuthProvider);
