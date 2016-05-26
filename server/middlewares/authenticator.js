@@ -131,6 +131,4 @@ module.exports = class Authenticator extends Middleware {
   }
 
   //TODO: passport OAuth, OpenID Connect
-
-  //TODO: rename this file to authenticator.js
 };

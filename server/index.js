@@ -48,7 +48,7 @@ app.use(passport.initialize());
  * authentication
  * configuration
  */
-var Authenticator = require('./middlewares/passport');
+var Authenticator = require('./middlewares/authenticator');
 var authenticator = new Authenticator(app, passport);
 var httpStatus = require('http-status');
 var middlewares = {
