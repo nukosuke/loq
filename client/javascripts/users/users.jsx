@@ -5,21 +5,14 @@ import { createHistory } from 'history'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider, connect } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
+import UserList from './containers/UserList'
+import userListReducer from './reducers/user-list-reducer'
 
 class UsersApp extends Component {
   render() {
-    //const { users } = this.props;
-
-    //stub
-    const users = [
-      { name: 'user01' },
-      { name: 'user02' },
-      { name: 'user03' },
-    ];
-
     return (
       <div id='user-app'>
-        { users.map(user => <li>{ user.name }</li>) }
+        <UserList />
       </div>
     );
   }
@@ -34,7 +27,7 @@ connect(
 */
 
 const reducer = combineReducers({
-  function(state = {}, action) { return state },
+  userListReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(ReduxThunk));

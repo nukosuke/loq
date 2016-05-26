@@ -76,7 +76,7 @@ module.exports = class UserController extends BaseController {
    */
   apiIndex(req, res) {
     this.models.User.findAll().then(function(users) {
-      res.json(users);
+      res.json({users});
     });
   }
 
