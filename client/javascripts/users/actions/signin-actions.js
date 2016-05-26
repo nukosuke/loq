@@ -46,7 +46,7 @@ export function signIn(identifier, password) {
   return (dispatch) => {
     dispatch(requestSignIn())
 
-    return fetch('/authenticate/token', {
+    return fetch('/api/authenticate/token', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -70,7 +70,7 @@ export function signOut(JWT) {
   return (dispatch) => {
     dispatch(requestSignOut())
 
-    return fetch('/authenticate/token', {
+    return fetch('/api/authenticate/token', {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
