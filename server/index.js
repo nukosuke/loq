@@ -6,6 +6,8 @@ var passport   = require('passport');
 var log4js     = require('log4js');
 var app = express();
 
+//TODO: wrap into Server and ApiServer
+
 /**
  * mode
  */
@@ -67,8 +69,11 @@ var UserController  = require('./controllers/user-controller');
 var AdminController = require('./controllers/admin-controller');
 var controllers = {
   page:  new PageController(),
-  user:  new UserController(),
+  user:  new UserController(models),
   admin: new AdminController(),
+  //api: {
+    //user: new ApiUserController(),
+  //},
 };
 app.set('controllers', controllers);
 
