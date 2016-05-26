@@ -37,8 +37,10 @@ module.exports = class Authenticator extends Middleware {
          */
          var select = (identifier.indexOf('@') != -1) ? { email: identifier } : { uid: identifier };
 
-         //TODO: fetch only ['id', 'scope']
-         User.findOne({ where: select }).then(function(user) {
+         User
+         .scope('authenticate')
+         .findOne({ where: select })
+         .then(function(user) {
            if (!user) {
              return done(null, false, { message: 'ユーザ名かパスワードが間違っています' });
            }
@@ -70,7 +72,11 @@ module.exports = class Authenticator extends Middleware {
         },
         function(payload, done) {
           var User = app.get('models').User;
-          User.findOne({ where: { uid: payload.uid } }).then(function(user) {
+
+          User
+          .scope('authenticate')
+          .findOne({ where: { uid: payload.uid } })
+          .then(function(user) {
             if (user) {
               done(null, user);
             } else {

@@ -84,6 +84,23 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
   }, {
+    defaultScope: {
+      attributes: [
+        'id',
+        'uid',
+        'name',
+        'avatar',
+        'family_name',
+        'given_name',
+        'bio',
+        'url',
+      ],
+    },
+    scopes: {
+      authenticate: {
+        attributes: ['uid', 'email', 'password_hash']
+      }
+    },
     underscored: true,
     hooks: {
       beforeCreate: hashPasswordHook,
