@@ -1,8 +1,8 @@
 'use strict';
 var express    = require('express');
 var bodyParser = require('body-parser');
-var Sequelize  = require('sequelize');
 var passport   = require('passport');
+var Sequelize  = require('sequelize');
 var log4js     = require('log4js');
 var app = express();
 
@@ -25,7 +25,7 @@ var config = {
 app.set('config', config);
 
 /**
- * TODO: start logger
+ * create logger
  */
 log4js.configure(config.logger);
 var logger = log4js.getLogger();
@@ -48,8 +48,14 @@ app.use(passport.initialize());
  * authentication
  * configuration
  */
-require('./middlewares/passport')(app, passport, config);
-app.set('passport', passport);
+var Authenticator = require('./middlewares/authenticator');
+var authenticator = new Authenticator(app, passport);
+var httpStatus = require('http-status');
+var middlewares = {
+  authenticator,
+  httpStatus,
+};
+app.set('middlewares', middlewares);
 
 /**
  * define model schemas
@@ -67,13 +73,14 @@ app.set('models', models);
 var PageController  = require('./controllers/page-controller');
 var UserController  = require('./controllers/user-controller');
 var AdminController = require('./controllers/admin-controller');
+var ApiUserController = require('./controllers/api-user-controller');
 var controllers = {
-  page:  new PageController(),
-  user:  new UserController(models),
-  admin: new AdminController(),
-  //api: {
-    //user: new ApiUserController(),
-  //},
+  page:  new PageController(app),
+  user:  new UserController(app),
+  admin: new AdminController(app),
+  api: {
+    user: new ApiUserController(app),
+  },
 };
 app.set('controllers', controllers);
 
@@ -83,7 +90,7 @@ app.set('controllers', controllers);
  */
 var pageRouter  = require('./routes/page-routes')(controllers);
 var authRouter  = require('./routes/authenticate-routes')(controllers);
-var userRouter  = require('./routes/user-routes')(controllers);
+var userRouter  = require('./routes/user-routes')(controllers, middlewares);
 var adminRouter = require('./routes/admin-routes')(controllers);
 app.use(pageRouter);
 app.use(authRouter);

@@ -3,12 +3,13 @@
 /**
  * authenticate routes
  */
-module.exports = function(controllers) { //TODO: (controllers, middlewares)
+module.exports = function(controllers) {
   var router = require('express').Router();
 
   router.get   ('/authenticate(/*)?' , controllers.user.authenticate);
-  router.post  ('/authenticate/token', controllers.user.token);
-  router.delete('/authenticate/token', (req, res) => res.json({message: 'not implemented'}));
+
+  router.post  ('/api/authenticate/token', controllers.api.user.token);
+  router.delete('/api/authenticate/token', (req, res) => res.json({message: 'not implemented'}));
 
   /**
    * TODO: third IdP authentication
