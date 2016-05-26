@@ -1,4 +1,3 @@
-var HttpStatus    = require('http-status');
 var LocalStrategy = require('passport-local').Strategy;
 var JwtStrategy   = require('passport-jwt').Strategy;
 var ExtractJwt    = JwtStrategy.ExtractJwt;
@@ -7,12 +6,11 @@ var ExtractJwt    = JwtStrategy.ExtractJwt;
  * passport configuration
  *TODO: classify
  */
-module.exports = function(app, passport, config) {
+module.exports = function(app, passport) {
   //TODO:
   //constructor(app, config, passport) {
-  //this.passport = passport
-  //
-  //
+  //this.passport = require('passport');
+  var config = app.get('config');
 
   /**
    * user authorize by (uid || email) and password
@@ -78,6 +76,9 @@ module.exports = function(app, passport, config) {
       });
     }
   ));
+
+  //this.requireJWT.bind(this);
+  // } // end of constructor
 
   //TODO: passport OAuth, OpenID Connect
 

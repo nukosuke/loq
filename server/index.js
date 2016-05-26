@@ -48,7 +48,7 @@ app.use(passport.initialize());
  * authentication
  * configuration
  */
-require('./middlewares/passport')(app, passport, config);
+require('./middlewares/passport')(app, passport);
 var jwt = require('jsonwebtoken');
 var httpStatus = require('http-status');
 var middlewares = {
