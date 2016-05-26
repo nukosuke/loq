@@ -12,6 +12,7 @@ module.exports = function(controllers) {
   /**
    * require authenticate
    */
+  //router.get('/')
   router.get('/settings', controllers.user.requireJWT, controllers.user.settings);
 
   /**
