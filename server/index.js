@@ -82,7 +82,7 @@ var userRouter  = require('./routes/user-routes')(controllers);
 var adminRouter = require('./routes/admin-routes')(controllers);
 app.use(pageRouter);
 app.use(authRouter);
-app.use('/users', userRouter);
+app.use(userRouter);
 app.use('/admin', adminRouter);
 
 

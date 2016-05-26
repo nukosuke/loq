@@ -6,18 +6,20 @@
 module.exports = function(controllers) {
   var router = require('express').Router();
 
-  router.get('/', controllers.user.index);
-  //router.get('/:username', controller.show);
+  router.get('/users', controllers.user.index);
+  router.get('/:username', controllers.user.show);
 
   /**
    * require authenticate
    */
-  //TODO: use passport to authenticate
-  //TODO: users/settings-controller.js
-  //router.get('/settings', controller);
-  // JSON API
-  //router.post('/settings/profile', controller.updateProfile);
-  //router.post('/settings/password', controller.updatePassword);
+  //router.get('/')
+  router.get('/settings', controllers.user.requireJWT, controllers.user.settings);
+
+  /**
+   * JSON API
+   */
+  //router.post('/settings/profile', controllers.user.setting.updateProfile);
+  //router.post('/settings/password', controllers.user.setting.updatePassword);
   //router.post('/settings/oauth/:provider', controller.updateOauthProvider);
   return router;
 };
