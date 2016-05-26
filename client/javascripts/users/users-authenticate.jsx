@@ -13,10 +13,10 @@ import signUpReducer from './reducers/signup-reducer'
 /**
  * App for Login and SignUp
  */
-class UserSignApp extends Component {
+class UsersAuthenticateApp extends Component {
   render() {
     return (
-      <div id='user-sign-app'>
+      <div id='users-authenticate-app'>
         <ul>
           <li><Link to='/signin'>sign in</Link></li>
           <li><Link to='/signup'>sign up</Link></li>
@@ -57,7 +57,7 @@ render(
     <Router history={history}>
       <Redirect from='' to='signin' />
       <Redirect from='/' to='signin' />
-      <Route path='/' component={UserSignApp}>
+      <Route path='/' component={UsersAuthenticateApp}>
         <Route name='signin' path='signin' component={UserSignInForm} />
         <Route name='signup' path='signup' component={UserSignUpForm} />
       </Route>
