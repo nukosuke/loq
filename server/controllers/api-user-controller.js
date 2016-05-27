@@ -11,22 +11,20 @@ module.exports = class ApiUserController extends BaseController {
 
   index(req, res) {
     this.models.User.findAll()
-    .then(function(users) {
-      return res.json({ users });
-    });
+    .then(users => res.json({ users }));
   }
 
   show(req, res) {
     this.models.User
-    .findOne({ where: req.params.id })
-    .then(function(user) {
+    .findOne({ where: { uid: req.params.uid } })
+    .then(user => {
       if(!user) {
         return res
-        .status(httpStatus.NOT_FOUND)
+        .status(this.middlewares.httpStatus.NOT_FOUND)
         .json({ user: {} });
       }
       return res
-      .status(httpStatus.OK)
+      .status(this.middlewares.httpStatus.OK)
       .json({ user });
     });
   }
