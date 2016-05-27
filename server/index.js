@@ -73,11 +73,13 @@ app.set('models', models);
  */
 var PageController  = require('./controllers/page-controller');
 var UserController  = require('./controllers/user-controller');
+var ArticleController = require('./controllers/article-controller');
 var AdminController = require('./controllers/admin-controller');
 var ApiUserController = require('./controllers/api-user-controller');
 var controllers = {
   page:  new PageController(app),
   user:  new UserController(app),
+  article: new ArticleController(app),
   admin: new AdminController(app),
   api: {
     user: new ApiUserController(app),
@@ -89,13 +91,15 @@ app.set('controllers', controllers);
  * routing middleware
  * configuration
  */
-var pageRouter  = require('./routes/page-routes')(controllers);
 var authRouter  = require('./routes/authenticate-routes')(controllers);
 var userRouter  = require('./routes/user-routes')(controllers, middlewares);
+var articleRouter = require('./routes/article-route')(controllers, middlewares);
+var pageRouter  = require('./routes/page-routes')(controllers);
 var adminRouter = require('./routes/admin-routes')(controllers);
-app.use(pageRouter);
 app.use(authRouter);
 app.use(userRouter);
+app.use(articleRouter);
+app.use(pageRouter);
 app.use('/admin', adminRouter);
 
 
