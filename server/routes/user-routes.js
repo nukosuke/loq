@@ -4,9 +4,10 @@
  * user routes
  */
 module.exports = function(controllers, middlewares) {
-  var router = require('express').Router();
+  var router = require('express').Router({ strict: true });
 
-  router.get('/users', controllers.user.index);
+  router.get('/users', (req, res) => res.redirect('/users/'));
+  router.get('/users/', controllers.user.index);
   router.get('/:username', controllers.user.show);
 
   /**
