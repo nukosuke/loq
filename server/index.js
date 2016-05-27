@@ -35,6 +35,7 @@ var logger = log4js.getLogger();
  * configuration
  */
 app.use(log4js.connectLogger(logger, { level: 'auto' }));
+app.enable('strict routing');
 app.use('/assets', express.static(__dirname + '/../public/assets'));
 app.use('/favicon.ico', express.static(__dirname + '/../public/favicon.ico'))
 app.use('/robots.txt', express.static(__dirname + '/../public/robots.txt'))
