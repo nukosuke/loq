@@ -62,9 +62,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     family_name: {
       type: DataTypes.STRING,
+      validate: {
+        max: 16,
+      },
     },
     given_name: {
       type: DataTypes.STRING,
+      validate: {
+        max: 16,
+      },
     },
     birthday: {
       type: DataTypes.DATEONLY,
@@ -87,6 +93,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     defaultScope: {
       underscored: true,
+      paranoid: true,
       attributes: [
         'id',
         'uid',
