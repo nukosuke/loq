@@ -23,7 +23,6 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     uid: {
       type: DataTypes.STRING,
-      unique: true,
       validate: {
         is: /^[a-zA-Z0-9][a-zA-Z0-9-]+$/,
         min: 5,
@@ -32,8 +31,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
       validate: {
         isEmail: true,
         notEmpty: true,
@@ -63,8 +60,12 @@ module.exports = function(sequelize, DataTypes) {
         isUrl: true,
       },
     },
-    family_name: DataTypes.STRING,
-    given_name: DataTypes.STRING,
+    family_name: {
+      type: DataTypes.STRING,
+    },
+    given_name: {
+      type: DataTypes.STRING,
+    },
     birthday: {
       type: DataTypes.DATEONLY,
       validate: {
@@ -85,6 +86,7 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     defaultScope: {
+      underscored: true,
       attributes: [
         'id',
         'uid',
@@ -101,7 +103,6 @@ module.exports = function(sequelize, DataTypes) {
         attributes: ['uid', 'email', 'password_hash']
       }
     },
-    underscored: true,
     hooks: {
       beforeCreate: hashPasswordHook,
       beforeUpdate: hashPasswordHook,
