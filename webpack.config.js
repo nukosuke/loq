@@ -8,7 +8,7 @@ module.exports = {
     'users': './client/javascripts/users/users.jsx',
     'users-authenticate': './client/javascripts/users/users-authenticate.jsx',
     'users-show': './client/javascripts/users/users-show.jsx',
-    'posts': './client/javascripts/posts/posts.jsx',
+    'articles': './client/javascripts/articles/articles.jsx',
   },
   output: {
     path: path.join(__dirname, 'public/assets/javascripts'),
