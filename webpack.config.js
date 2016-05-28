@@ -7,6 +7,7 @@ module.exports = {
     'admin': './client/javascripts/admin/admin.jsx',
     'users': './client/javascripts/users/users.jsx',
     'users-authenticate': './client/javascripts/users/users-authenticate.jsx',
+    'users-show': './client/javascripts/users/users-show.jsx',
     'posts': './client/javascripts/posts/posts.jsx',
   },
   output: {

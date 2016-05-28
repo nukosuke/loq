@@ -4,22 +4,38 @@
  * user routes
  */
 module.exports = function(controllers, middlewares) {
-  var router = require('express').Router();
+  var router = require('express').Router({ strict: true });
 
-  router.get('/users', controllers.user.index);
-  router.get('/:username', controllers.user.show);
+  router.get('/users', (req, res) => res.redirect('/users/'));
+  router.get('/users/', controllers.user.index);
+
+  /**
+   * user profile page
+   */
+  router.get('/:uid/', (req, res) => res.redirect(`/${req.params.uid}`));
+  router.get('/:uid', controllers.user.show);
 
   /**
    * require authenticate
    */
-  //router.get('/')
   router.get('/settings', middlewares.authenticator.requireJWT, controllers.user.settings);
+
+
+
 
   /**
    * JSON API
    */
-  router.get('/api/users', controllers.api.user.index);
-  //router.post('/api/settings/profile', controllers.user.setting.updateProfile);
+  router.get('/api/users/', controllers.api.user.index);
+
+  //TODO: /api/users/:id_or_uid?key=(id|uid) [default: id]
+  router.get('/api/users/:uid', controllers.api.user.show);
+
+  /**
+   * require authenticate
+   */
+  //router.put('/api/users/:id');
+
   //router.post('/api/settings/password', controllers.user.setting.updatePassword);
   //router.post('/api/settings/authenticate/:provider', controller.updateAuthProvider);
   return router;

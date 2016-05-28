@@ -62,7 +62,7 @@ export function signIn(identifier, password) {
       return json.JWT
     })
     .then(JWT => localStorage.setItem('JWT', JWT))
-    .then(() => window.location.assign('/users'))
+    .then(() => window.location.assign('/'))
   }
 }
 

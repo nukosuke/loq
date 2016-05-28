@@ -11,7 +11,7 @@ import userListReducer from './reducers/user-list-reducer'
 class UsersApp extends Component {
   render() {
     return (
-      <div id='user-app'>
+      <div id='users-app'>
         <UserList />
       </div>
     );
