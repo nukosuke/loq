@@ -49,12 +49,15 @@ app.use(passport.initialize());
  * authentication
  * configuration
  */
+var httpStatus = require('http-status');
+var _ = Sequelize.Utils._;
 var Authenticator = require('./middlewares/authenticator');
 var authenticator = new Authenticator(app, passport);
-var httpStatus = require('http-status');
+
 var middlewares = {
-  authenticator,
   httpStatus,
+  _,
+  authenticator,
 };
 app.set('middlewares', middlewares);
 
