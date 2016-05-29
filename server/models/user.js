@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
   /**
    * User model definition
    */
-  var User = sequelize.define('User', {
+  var User = sequelize.define('user', {
     uid: {
       type: DataTypes.STRING,
       validate: {
@@ -91,9 +91,9 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
   }, {
+    underscored: true,
+    paranoid: true,
     defaultScope: {
-      underscored: true,
-      paranoid: true,
       attributes: [
         'id',
         'uid',
@@ -116,7 +116,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        User.hasMany(models.Article);
+        //User.belongsTo(models.Organization);
       }
     },
     instanceMethods: {
