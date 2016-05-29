@@ -6,7 +6,7 @@
 module.exports = function(controllers) {
   var router = require('express').Router();
 
-  router.get('/', controllers.admin.index);
+  router.get('/admin', controllers.admin.index);
 
   // JSON API
   //router.post('/settings/', controller.);
