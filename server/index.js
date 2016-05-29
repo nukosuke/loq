@@ -66,10 +66,9 @@ app.set('middlewares', middlewares);
  */
 var sequelize = new Sequelize(config.database[mode]);
 var models = {
-  User: require('./models/user')(sequelize, Sequelize),
+  User:    require('./models/user')(sequelize, Sequelize),
   Article: require('./models/article')(sequelize, Sequelize),
 };
-// setup associations
 _(models).each(model => model.associate(models));
 app.set('models', models);
 
@@ -77,20 +76,15 @@ app.set('models', models);
  * create controller
  * instances
  */
-var PageController  = require('./controllers/page-controller');
-var UserController  = require('./controllers/user-controller');
-var ArticleController = require('./controllers/article-controller');
-var AdminController = require('./controllers/admin-controller');
-var ApiUserController = require('./controllers/api-user-controller');
-var ApiArticleController = require('./controllers/api-article-controller');
+var c = require('./controllers');
 var controllers = {
-  page:  new PageController(app),
-  user:  new UserController(app),
-  article: new ArticleController(app),
-  admin: new AdminController(app),
+  page:    new c.PageController(app),
+  user:    new c.UserController(app),
+  article: new c.ArticleController(app),
+  admin:   new c.AdminController(app),
   api: {
-    user: new ApiUserController(app),
-    article: new ApiArticleController(app),
+    user:    new c.ApiUserController(app),
+    article: new c.ApiArticleController(app),
   },
 };
 app.set('controllers', controllers);
@@ -99,11 +93,11 @@ app.set('controllers', controllers);
  * routing middleware
  * configuration
  */
-var authRouter  = require('./routes/authenticate-routes')(controllers);
-var userRouter  = require('./routes/user-routes')(controllers, middlewares);
+var authRouter    = require('./routes/authenticate-routes')(controllers);
+var userRouter    = require('./routes/user-routes')(controllers, middlewares);
 var articleRouter = require('./routes/article-route')(controllers, middlewares);
-var pageRouter  = require('./routes/page-routes')(controllers);
-var adminRouter = require('./routes/admin-routes')(controllers);
+var pageRouter    = require('./routes/page-routes')(controllers);
+var adminRouter   = require('./routes/admin-routes')(controllers);
 app.use(authRouter);
 app.use(userRouter);
 app.use(articleRouter);
