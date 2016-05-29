@@ -65,10 +65,12 @@ app.set('middlewares', middlewares);
  * define model schemas
  */
 var sequelize = new Sequelize(config.database[mode]);
-var models = {
-  User:    require('./models/user')(sequelize, Sequelize),
-  Article: require('./models/article')(sequelize, Sequelize),
-};
+var modelClasses = require('./models');
+
+var models = _(modelClasses).each((Model, name) => {
+  modelClasses[name] = Model(sequelize, Sequelize);
+});
+
 _(models).each(model => model.associate(models));
 app.set('models', models);
 
@@ -76,15 +78,15 @@ app.set('models', models);
  * create controller
  * instances
  */
-var c = require('./controllers');
+var controllerClasses = require('./controllers');
 var controllers = {
-  page:    new c.PageController(app),
-  user:    new c.UserController(app),
-  article: new c.ArticleController(app),
-  admin:   new c.AdminController(app),
+  page:    new controllerClasses.PageController(app),
+  user:    new controllerClasses.UserController(app),
+  article: new controllerClasses.ArticleController(app),
+  admin:   new controllerClasses.AdminController(app),
   api: {
-    user:    new c.ApiUserController(app),
-    article: new c.ApiArticleController(app),
+    user:    new controllerClasses.ApiUserController(app),
+    article: new controllerClasses.ApiArticleController(app),
   },
 };
 app.set('controllers', controllers);
@@ -93,8 +95,8 @@ app.set('controllers', controllers);
  * routing middleware
  * configuration
  */
-var Routes = require('./routes');
-_(Routes).each(Route => {
+var routeClasses = require('./routes');
+_(routeClasses).each(Route => {
   var route = new Route(controllers, middlewares);
   app.use(route);
 });
