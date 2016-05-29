@@ -66,10 +66,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     instanceMethods: {
-      publish: function(callback) {
+      publish: function() {
         this.set('published', true);
       },
-      unpublish: function(callback) {
+      unpublish: function() {
         this.set('published', false);
       },
     },
