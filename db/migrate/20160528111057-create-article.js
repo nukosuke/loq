@@ -1,48 +1,55 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Articles', {
+    queryInterface.createTable('articles', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       published: {
-        type: Sequelize.BOOL
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
-      year: {
-        type: Sequelize.NUMBER
-      },
-      month: {
-        type: Sequelize.NUMBER
-      },
-      day: {
-        type: Sequelize.NUMBER
+      published_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: '0000-00-00 00:00:00',
       },
       slug: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
+        defaultValue: '',
       },
       title: {
-        type: Sequelize.STRING
-      },
-      body: {
-        type: Sequelize.TEXT
-      },
-      createdAt: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: '',
       },
-      updatedAt: {
+      body_markdown: {
+        type: Sequelize.TEXT,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: '',
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       }
     });
+    return queryInterface.addIndex('articles', ['user_id', 'published', 'published_at', 'slug']);
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Articles');
+    return queryInterface.dropTable('articles');
   }
 };
