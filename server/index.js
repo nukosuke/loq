@@ -93,16 +93,10 @@ app.set('controllers', controllers);
  * routing middleware
  * configuration
  */
-var authRouter    = require('./routes/authenticate-routes')(controllers);
-var userRouter    = require('./routes/user-routes')(controllers, middlewares);
-var articleRouter = require('./routes/article-route')(controllers, middlewares);
-var pageRouter    = require('./routes/page-routes')(controllers);
-var adminRouter   = require('./routes/admin-routes')(controllers);
-app.use(authRouter);
-app.use(userRouter);
-app.use(articleRouter);
-app.use(pageRouter);
-app.use('/admin', adminRouter);
-
+var Routes = require('./routes');
+_(Routes).each(Route => {
+  var route = new Route(controllers, middlewares);
+  app.use(route);
+});
 
 app.listen(process.env.PORT || 3000);
