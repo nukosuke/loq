@@ -5,5 +5,8 @@ module.exports = function(controllers, middlewares) {
 
   router.get('/', controllers.article.index);
 
+  router.get('/api/articles/', controllers.api.article.index);
+  router.get('/api/articles/:id', controllers.api.article.show);
+
   return router;
 };
