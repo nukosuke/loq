@@ -13,15 +13,20 @@ var app = express();
  */
 var mode = process.env.NODE_ENV || 'development';
 
+var constants = {
+  rootdir: __dirname + '/../',
+};
+app.set('constants', constants);
+
 /**
  * load configuration files
  */
 var config = {
   //config:         require('../config/config'),
   logger:         require('../config/logger'),
-  database:       require('../config/database'),
+  database:       require('../config/database')[mode],
   authentication: require('../config/authentication'),
-  mailer:         require('../config/mailer'),
+  mailer:         require('../config/mailer')[mode],
 };
 app.set('config', config);
 
@@ -50,22 +55,26 @@ app.use(passport.initialize());
  * authentication
  * configuration
  */
-var httpStatus = require('http-status');
-var _ = Sequelize.Utils._;
 var Authenticator = require('./middlewares/authenticator');
+var Mailer        = require('./middlewares/mailer');
+
+var httpStatus    = require('http-status');
+var _             = require('lodash');
 var authenticator = new Authenticator(app, passport);
+var mailer        = new Mailer(app);
 
 var middlewares = {
   httpStatus,
   _,
   authenticator,
+  mailer,
 };
 app.set('middlewares', middlewares);
 
 /**
  * define model schemas
  */
-var sequelize = new Sequelize(config.database[mode]);
+var sequelize = new Sequelize(config.database);
 var modelClasses = require('./models');
 
 var models = _(modelClasses).each((Model, name) => {
