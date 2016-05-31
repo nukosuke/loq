@@ -21,6 +21,7 @@ var config = {
   logger:         require('../config/logger'),
   database:       require('../config/database'),
   authentication: require('../config/authentication'),
+  mailer:         require('../config/mailer'),
 };
 app.set('config', config);
 
