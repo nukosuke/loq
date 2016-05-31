@@ -1,0 +1,11 @@
+extends ../../layout/email
+
+block body
+  p
+  | Hi!&nbsp;
+  = name
+  | &nbsp;(@
+  = uid
+  | )&nbsp;
+  br
+  a(href=confirmationLink) Confirm E-mail address
