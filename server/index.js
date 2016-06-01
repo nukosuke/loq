@@ -13,6 +13,9 @@ var app = express();
  */
 var mode = process.env.NODE_ENV || 'development';
 
+/**
+ * shared constants configuration
+ */
 var constants = {
   rootdir: __dirname + '/../',
 };
