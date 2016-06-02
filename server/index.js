@@ -70,6 +70,7 @@ var mailer        = new Mailer(app);
 var middlewares = {
   httpStatus,
   _,
+  logger,
   authenticator,
   mailer,
 };
