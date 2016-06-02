@@ -18,7 +18,6 @@ module.exports = class Mailer extends Middleware {
     this.senders = {};
     this.queue   = [];
 
-    //TODO: env have to be set in server/index.js
     this.transporter = nodemailer.createTransport(smtpPool(this.config.mailer.smtp));
 
     var promise = new Promise(resolve => {
