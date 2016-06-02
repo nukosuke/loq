@@ -20,6 +20,7 @@ const initialProfileState = {
   bio: '',
   avatar: '',
   url: '',
+  articles: [],
 };
 
 const initialFollowState = {

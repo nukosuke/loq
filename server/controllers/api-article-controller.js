@@ -5,12 +5,22 @@ module.exports = class ApiArticleController extends BaseController {
   constructor(app) {
     super(app);
     this.status = this.middlewares.httpStatus;
-    this.middlewares._.bindAll(this, 'index', 'show');
+    this._      = this.middlewares._;
+    this._.bindAll(this, 'index', 'show');
   }
 
   index(req, res) {
+    var query = this._.pick(req.query, [
+      'user_id',
+      //tag_id,
+      'limit',
+    ]);
+
     this.models.Article
-    .findAll()
+    .findAll({
+      //where: { query },
+      include: [{ model: this.models.User }],
+    })
     .then(articles => res.json({ articles }));
   }
 
