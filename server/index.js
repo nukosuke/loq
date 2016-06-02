@@ -17,6 +17,7 @@ var mode = process.env.NODE_ENV || 'development';
  * shared constants configuration
  */
 var constants = {
+  version: require('../package.json').version,
   rootdir: __dirname + '/../',
 };
 app.set('constants', constants);
