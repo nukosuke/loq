@@ -65,7 +65,7 @@ var Mailer        = require('./middlewares/mailer');
 var httpStatus    = require('http-status');
 var _             = require('lodash');
 var authenticator = new Authenticator(app, passport);
-var mailer        = new Mailer(app);
+var mailer        = new Mailer(app, logger);
 
 var middlewares = {
   httpStatus,
@@ -116,4 +116,5 @@ _(routeClasses).each(Route => {
   app.use(route);
 });
 
+logger.info(`starting loq v${constants.version}`);
 app.listen(process.env.PORT || 3000);

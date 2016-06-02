@@ -11,8 +11,9 @@ var EmailTemplate = require('email-templates').EmailTemplate;
  * mailer middleware
  */
 module.exports = class Mailer extends Middleware {
-  constructor(app) {
+  constructor(app, logger) {
     super(app);
+    this.logger = logger;
 
     //TODO: use Queueing system
     this.senders = {};
@@ -23,11 +24,9 @@ module.exports = class Mailer extends Middleware {
     var promise = new Promise(resolve => {
       this.transporter.verify(err => {
         if (err) {
-          console.log(err);
+          this.logger.error('failed to connect smtp server: ' + err);
         } else {
-          //TODO: use punctual logger
-          //logger.info();
-          console.log('Server is ready to take our messages');
+          this.logger.info('connected to smtp server');
         }
         resolve();
       });
@@ -61,8 +60,7 @@ module.exports = class Mailer extends Middleware {
 
           this.senders[message.template](message.fields, message.context)
           .then(() => {
-            //TODO: logging
-            console.log('sent');
+            this.logger.info(`sent mail template=${message.template}`);
           });
         }
       });
