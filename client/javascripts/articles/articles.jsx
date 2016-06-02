@@ -5,12 +5,14 @@ import { createHistory } from 'history'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider, connect } from 'react-redux'
 import ReduxThunk from 'redux-thunk'
+import ArticleList from './containers/ArticleList'
+import articleListReducer from './reducers/article-list-reducer'
 
 class ArticlesApp extends Component {
   render() {
     return (
       <div id='articles-app'>
-        <p>articles</p>
+        <ArticleList />
       </div>
     );
   }
@@ -22,26 +24,20 @@ class ArticlesApp extends Component {
 <ArticleList type='me' />
 */
 
-/*
+
 const reducer = combineReducers({
-  articleReducer,
+  articleListReducer,
 });
-*/
 
-//const store = createStore(reducer, applyMiddleware(ReduxThunk));
+const store = createStore(reducer, applyMiddleware(ReduxThunk));
 
-//const history = browserHistory;
+const history = browserHistory;
 
-
-/*
-<Provider store={store}>
-  <Router history={history}>
-    <Route path='/' component={ArticlesApp}>
-    </Route>
-  </Router>
-</Provider>
-*/
 render(
-  <ArticlesApp />,
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path='/' component={ArticlesApp} />
+    </Router>
+  </Provider>,
   document.getElementById('app'),
 );
