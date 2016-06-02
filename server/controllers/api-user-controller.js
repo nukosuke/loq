@@ -18,12 +18,16 @@ module.exports = class ApiUserController extends BaseController {
     this.models.User
     .findOne({
       where: { uid: req.params.uid },
+      include: [{
+        model: this.models.Article,
+        required: false,
+      }],
     })
     .then(user => {
       if(!user) {
         return res.status(this.status.NOT_FOUND).json({});
       }
-      res.json({ user });
+      return res.json({ user });
     });
   }
 

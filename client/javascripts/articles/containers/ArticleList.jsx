@@ -10,7 +10,7 @@ class ArticleList extends Component {
       <div id='article-list'>
         <ul>
           { articles.articles.map(article =>
-            <li>{ article.title }</li>
+            <li>{ article.title } - <a href={ '/' + article.user.uid }>{ article.user.name }</a></li>
           ) }
         </ul>
       </div>
