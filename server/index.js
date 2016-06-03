@@ -26,7 +26,7 @@ app.set('constants', constants);
  * load configuration files
  */
 var config = {
-  //config:         require('../config/config'),
+  config:         require('../config/config')[mode],
   logger:         require('../config/logger'),
   database:       require('../config/database')[mode],
   authentication: require('../config/authentication'),
