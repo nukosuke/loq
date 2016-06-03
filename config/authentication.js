@@ -4,7 +4,8 @@
  * authentication
  * configuration
  */
-module.exports = {
+module.exports.development =
+module.exports.production  = {
   /**
    * Json Web Token
    * https://tools.ietf.org/html/rfc7519
