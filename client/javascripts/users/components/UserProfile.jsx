@@ -9,22 +9,31 @@ class UserProfile extends React.Component {
 
     return (
       <div class='user-profile'>
-        <ul>
-          <li>{ avatar }</li>
-          <li>{ name }</li>
-          <li>@{ uid }</li>
-          <li>{ [family_name,given_name].join(' ') }</li>
-          <li>{ bio }</li>
-          <li><a class='url' href='{ url }' title='url'>{ url }</a></li>
-        </ul>
+        <div>{ avatar }</div>
+        <h1>{ name } <small>@{ uid }</small></h1>
+        <table>
+          <tbody>
+            <tr>
+              <td>Name:</td>
+              <td>{ [family_name,given_name].join(' ') }</td>
+            </tr>
+            <tr>
+              <td>Bio:</td>
+              <td>{ bio }</td>
+            </tr>
+            <tr>
+              <td>URL:</td>
+              <td><a class='url' href='{ url }' title='url'>{ url }</a></td>
+            </tr>
+          </tbody>
+        </table>
 
+        <h2>Articles</h2>
         <ul>
           { articles.map(article =>
               <li key={ article.id }>{ article.title }</li>
             ) }
         </ul>
-
-        <button>follow</button>
       </div>
     );
   }

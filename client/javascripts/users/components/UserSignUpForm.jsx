@@ -9,7 +9,7 @@ class UserSignUpForm extends Component {
   render() {
     return (
       <form id='sign-up-form'>
-        <input type='text'     ref='name'             placeholder='ID' />
+        <input type='text'     ref='uid'              placeholder='ID' />
         <input type='text'     ref='email'            placeholder='email address' />
         <input type='password' ref='password'         placeholder='password' />
         <input type='password' ref='password_confirm' placeholder='password again' />
@@ -22,9 +22,9 @@ class UserSignUpForm extends Component {
     e.preventDefault()
 
     const { dispatch } = this.props
-    const { name, email, password, password_confirm } = this.refs
+    const { uid, email, password, password_confirm } = this.refs
 
-    dispatch(signUp(name.value, email.value, password.value, password_confirm.value))
+    dispatch(signUp(uid.value, email.value, password.value, password_confirm.value))
   }
 }
 
