@@ -5,7 +5,15 @@
  * configuration
  */
 module.exports = {
-  appenders: [
-    { type: 'console' },
-  ],
+  development: {
+    appenders: [
+      { type: 'console' },
+    ],
+  },
+
+  production: {
+    appenders: [
+      { type: 'console' },
+    ],
+  },
 };

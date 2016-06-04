@@ -1,6 +1,9 @@
 extends ../../layout/email
 
 block body
+  div(align='center')
+    h1(style='font-size: 24pt;') welcome to loq !!
+
   p
   | Hi!&nbsp;
   = name
@@ -8,4 +11,5 @@ block body
   = uid
   | )&nbsp;
   br
-  a(href=confirmationLink) Confirm E-mail address
+  p please confirm this address to activate your account.
+  a(href=confirmLink title='confirm' style='background: red; color: #eee; padding: 4px 8px;') Confirm

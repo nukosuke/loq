@@ -42,8 +42,21 @@ export function responseSignUp(response) {
  * thunk creators
  * asyncronous request for sign-up
  */
-export function signUp(identifier, email, password, password_confirm) {
+export function signUp(uid, email, password, password_confirm) {
   return (dispatch) => {
-    //TODO:
+    dispatch(requestSignUp());
+
+    fetch('/api/users/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uid, email, password, password_confirm,
+      }),
+    })
+    .then(response => response.json())
+    .then(json => dispatch(responseSignUp(json)));
   }
 }

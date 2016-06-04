@@ -26,10 +26,10 @@ app.set('constants', constants);
  * load configuration files
  */
 var config = {
-  //config:         require('../config/config'),
-  logger:         require('../config/logger'),
+  config:         require('../config/config')[mode],
+  logger:         require('../config/logger')[mode],
   database:       require('../config/database')[mode],
-  authentication: require('../config/authentication'),
+  authentication: require('../config/authentication')[mode],
   mailer:         require('../config/mailer')[mode],
 };
 app.set('config', config);
@@ -79,7 +79,9 @@ app.set('middlewares', middlewares);
 /**
  * define model schemas
  */
-var sequelize = new Sequelize(config.database);
+config.database.logging = args => logger.debug(args);
+
+var sequelize    = new Sequelize(config.database);
 var modelClasses = require('./models');
 
 var models = _(modelClasses).each((Model, name) => {
