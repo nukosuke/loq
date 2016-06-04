@@ -7,7 +7,8 @@ module.exports = function(controllers, middlewares) {
 
   router.get('/api/articles/', controllers.api.article.index);
   router.get('/api/articles/:id', controllers.api.article.show);
-  router.post('/api/articles/', controllers.api.article.create);
+
+  router.post('/api/articles/', middlewares.authenticator.requireJWT, controllers.api.article.create);
 
   return router;
 };
