@@ -73,7 +73,7 @@ module.exports = class ApiUserController extends BaseController {
         context: {
           name: user.uid,
           uid:  user.uid,
-          confirmationLink: `${this.config.config.baseUrl}/authenticate/confirm_email`,
+          confirmLink: `${this.config.config.baseUrl}/authenticate/confirm_email`,
         },
       });
       return res.redirect('/authenticate/check_your_inbox');
