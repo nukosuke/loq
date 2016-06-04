@@ -107,7 +107,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     scopes: {
       authenticate: {
-        attributes: ['uid', 'email', 'password_hash']
+        attributes: ['id', 'uid', 'email']
       }
     },
     hooks: {
