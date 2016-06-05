@@ -28,7 +28,7 @@ export function fetchArticles(jwt, options) {
   return (dispatch) => {
     dispatch(requestFetchArticles());
 
-    fetch('/api/articles/', {
+    fetch(`${window.CONSTANTS.API}/articles/`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -36,6 +36,7 @@ export function fetchArticles(jwt, options) {
     })
     .then(response => response.json())
     .then(json => json.articles)
-    .then(articles => dispatch(responseFetchArticles(articles)));
+    .then(articles => dispatch(responseFetchArticles(articles)))
+    .catch(err => console.log(err));
   }
 }
