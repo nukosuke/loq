@@ -4,14 +4,17 @@ var bodyParser = require('body-parser');
 var passport   = require('passport');
 var Sequelize  = require('sequelize');
 var log4js     = require('log4js');
+var _          = require('lodash');
 var app = express();
 
 //TODO: wrap into Server and ApiServer
+
 
 /**
  * mode
  */
 var mode = process.env.NODE_ENV || 'development';
+
 
 /**
  * shared constants configuration
@@ -22,17 +25,18 @@ var constants = {
 };
 app.set('constants', constants);
 
+
 /**
  * load configuration files
  */
-var config = {
-  config:         require('../config/config')[mode],
-  logger:         require('../config/logger')[mode],
-  database:       require('../config/database')[mode],
-  authentication: require('../config/authentication')[mode],
-  mailer:         require('../config/mailer')[mode],
-};
+var config = require('../config');
+
+_(config).each((v, k) => {
+  config[k] = v[mode];
+});
+
 app.set('config', config);
+
 
 /**
  * create logger
@@ -63,7 +67,7 @@ var Authenticator = require('./middlewares/authenticator');
 var Mailer        = require('./middlewares/mailer');
 
 var httpStatus    = require('http-status');
-var _             = require('lodash');
+
 var authenticator = new Authenticator(app, passport);
 var mailer        = new Mailer(app, logger);
 

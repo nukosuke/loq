@@ -6,8 +6,8 @@ module.exports = function(sequelize, DataTypes) {
    * if no slug param is given
    */
   var defaultSlugHook = function(article, options, callback) {
-    if (article.get('slug') === '' ) {
-      article.set('slug', (new Date(article.get('published_at')).getTime()));
+    if (!article.get('slug') || article.get('slug') === '' ) {
+      article.set('slug', (new Date().getTime()));
     }
     callback(null, options);
   };
