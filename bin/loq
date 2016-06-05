@@ -1,0 +1,6 @@
+#!/bin/sh
+
+SERVER=$(npm root)/../server;
+node $SERVER/assets-server.js &
+node $SERVER/api-server.js &
+node $SERVER/server.js
