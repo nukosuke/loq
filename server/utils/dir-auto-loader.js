@@ -5,8 +5,11 @@
 'use strict';
 
 module.exports = function(dirname, uppercase) {
+  if(uppercase === undefined) {
+    uppercase = true;
+  }
+  
   var modules   = {};
-  uppercase = uppercase || true;
 
   require('fs').readdirSync(dirname + '/').forEach(file => {
     if (file.match(/\.js$/) !== null && file !== 'index.js') {
