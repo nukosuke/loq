@@ -52,7 +52,7 @@ export function fetchUserProfile(uid) {
   return (dispatch) => {
     dispatch(requestUserProfile());
 
-    fetch(`/api/users/${uid}`, {
+    fetch(`${window.CONSTANTS.API}/users/${uid}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -68,7 +68,7 @@ export function followUser(id) {
   return (dispatch) => {
     dispatch(requestFollowUser());
 
-    fetch('/api/users/following/', {
+    fetch(`${window.CONSTANTS.API}/users/following/`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -85,7 +85,7 @@ export function unfollowUser(id) {
   return (dispatch) => {
     dispatch(requestUnfollowUser());
 
-    fetch('/api/users/following/', {
+    fetch(`${window.CONSTANTS.API}/users/following/`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
