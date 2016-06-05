@@ -9,8 +9,12 @@ class ArticleList extends Component {
     return(
       <div id='article-list'>
         <ul>
-          { articles.articles.map(article =>
-            <li>{ article.title } - <a href={ '/' + article.user.uid }>{ article.user.name }</a></li>
+          { articles.articles.map(article => {
+              const date = new Date(article.published_at);
+              return (
+                <li><a href={ '/' + article.user.uid + '/articles/' + date.getFullYear() + '/' + date.getMonth()+1 + '/' + date.getDate() + '/' + article.slug }>{ article.title }</a> - <a href={ '/' + article.user.uid }>{ article.user.name }</a></li>
+              );
+            }
           ) }
         </ul>
       </div>

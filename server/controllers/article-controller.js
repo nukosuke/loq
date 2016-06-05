@@ -9,4 +9,8 @@ module.exports = class ArticleController extends BaseController {
   index(req, res) {
     res.render('articles/index', { title: 'articles' });
   }
+
+  show(req, res) {
+    res.render('articles/show', { title: 'articles show' });
+  }
 };
