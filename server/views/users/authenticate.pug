@@ -1,4 +1,5 @@
 extends ../layout/spa
 
 block post-scripts
-  script(src='/assets/javascripts/users-authenticate.js')
+  script(src=`//${servers.assets}/javascripts/constants.js`)
+  script(src=`//${servers.assets}/javascripts/users-authenticate.js`)
