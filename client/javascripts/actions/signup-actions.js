@@ -46,7 +46,7 @@ export function signUp(uid, email, password, password_confirm) {
   return (dispatch) => {
     dispatch(requestSignUp());
 
-    fetch('/api/users/', {
+    fetch(`${window.CONSTANTS.API}/users/`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

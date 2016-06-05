@@ -8,9 +8,6 @@ module.exports = function(controllers) {
 
   router.get   ('/authenticate(/*)?' , controllers.user.authenticate);
 
-  router.post  ('/api/authenticate/token', controllers.api.user.token);
-  router.delete('/api/authenticate/token', (req, res) => res.json({message: 'not implemented'}));
-
   /**
    * TODO: third IdP authentication
    */

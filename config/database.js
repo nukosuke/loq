@@ -6,9 +6,8 @@
  */
 module.exports = {
   development: {
-    storage: 'db/development.db',
+    storage: __dirname+'/../db/development.db',
     dialect: 'sqlite',
-    logging: true,
   },
 
   test: {

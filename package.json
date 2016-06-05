@@ -46,6 +46,7 @@
     "redux-thunk": "^2.1.0",
     "sequelize": "^3.23.2",
     "sequelize-cli": "^2.4.0",
+    "vhost": "^3.0.2",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

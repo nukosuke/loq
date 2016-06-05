@@ -28,7 +28,7 @@ export function fetchUsers(jwt, options) {
   return (dispatch) => {
     dispatch(requestFetchUsers());
 
-    fetch('/api/users/', {
+    fetch(`${window.CONSTANTS.API}/users/`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

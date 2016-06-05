@@ -22,7 +22,11 @@ module.exports = class ApiArticleController extends BaseController {
       //where: { query },
       include: [{ model: this.models.User }],
     })
-    .then(articles => res.json({ articles }));
+    .then(articles => res.json({ articles }))
+    .catch(err => {
+      this.logger.error(err);
+      res.sendStatus(this.status.INTERNAL_SERVER_ERROR);
+    });
   }
 
   show(req, res) {

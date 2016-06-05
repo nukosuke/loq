@@ -4,11 +4,12 @@ var cwd     = process.cwd();
 
 module.exports = {
   entry: {
+    'constants': './client/javascripts/constants.js',
     'admin': './client/javascripts/admin/admin.jsx',
-    'users': './client/javascripts/users/users.jsx',
-    'users-authenticate': './client/javascripts/users/users-authenticate.jsx',
-    'users-show': './client/javascripts/users/users-show.jsx',
-    'articles': './client/javascripts/articles/articles.jsx',
+    'users': './client/javascripts/users.jsx',
+    'users-authenticate': './client/javascripts/users-authenticate.jsx',
+    'users-show': './client/javascripts/users-show.jsx',
+    'articles': './client/javascripts/articles.jsx',
   },
   output: {
     path: path.join(__dirname, 'public/assets/javascripts'),
