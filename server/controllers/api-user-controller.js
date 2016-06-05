@@ -76,9 +76,12 @@ module.exports = class ApiUserController extends BaseController {
           confirmLink: `${this.config.config.baseUrl}/authenticate/confirm_email`,
         },
       });
-      return res.redirect('/authenticate/check_your_inbox');
-      //TODO: welcome page
-      // sent email. please confirm your address.
+
+      // redirect must be executed on client
+      // because cross origin redirect is forbidden by browser
+      res.json({
+        message: 'Thanks for your registration! Check your inbox and confirm email address :)'
+      });
     });
   }
 
