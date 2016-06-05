@@ -22,23 +22,5 @@ module.exports = function(controllers, middlewares) {
 
 
 
-  /**
-   * JSON API
-   */
-  router.get('/api/users/', controllers.api.user.index);
-
-  //TODO: /api/users/:id_or_uid?key=(id|uid) [default: id]
-  router.get('/api/users/:uid', controllers.api.user.show);
-
-  //TODO: require token prevent from account bot
-  router.post('/api/users/', controllers.api.user.create);
-  
-  /**
-   * require authenticate
-   */
-  //router.put('/api/users/:id');
-
-  //router.post('/api/settings/password', controllers.user.setting.updatePassword);
-  //router.post('/api/settings/authenticate/:provider', controller.updateAuthProvider);
   return router;
 };
