@@ -13,7 +13,7 @@ module.exports = function(controllers, middlewares) {
    * user profile page
    */
   router.get('/:uid/', (req, res) => res.redirect(`/${req.params.uid}`));
-  router.get('/:uid', controllers.user.show);
+  router.get('/:uid', controllers.user.index);
 
   /**
    * require authenticate
