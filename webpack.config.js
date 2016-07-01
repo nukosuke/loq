@@ -7,7 +7,6 @@ module.exports = {
     'application': './client/javascripts/Application.jsx',
     'constants': './client/javascripts/constants.js',
     'admin': './client/javascripts/admin/admin.jsx',
-    'articles': './client/javascripts/articles.jsx',
   },
   output: {
     path: path.join(__dirname, 'public/assets/javascripts'),
