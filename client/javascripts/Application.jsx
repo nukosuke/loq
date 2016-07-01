@@ -8,12 +8,17 @@ import ReduxThunk from 'redux-thunk'
 /**
  * reducers
  */
+import signInReducer from './reducers/signin-reducer'
+import signUpReducer from './reducers/signup-reducer'
 import userListReducer from './reducers/user-list-reducer'
 import { userProfileReducer, userFollowReducer } from './reducers/user-profile-reducer'
 
 /**
  * components
  */
+import UserSignInForm from './components/UserSignInForm'
+import UserSignUpForm from './components/UserSignUpForm'
+import UserSignUpSentMail from './components/UserSignUpSentMail'
 import UserList from './containers/UserList'
 import UserProfile from './components/UserProfile'
 
@@ -34,6 +39,8 @@ class Application extends Component {
  * combine all reducers
  */
 const reducer = combineReducers({
+  signInReducer,
+  signUpReducer,
   userListReducer,
   userProfileReducer,
   userFollowReducer,
@@ -51,6 +58,9 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={Application}>
+        <Route name='signin'   path='signin'   component={UserSignInForm} />
+        <Route name='signup'   path='signup'   component={UserSignUpForm} />
+        <Route name='sentmail' path='sentmail' component={UserSignUpSentMail} />
         <Route path='users/' component={UserList} />
         <Route path=':uid' component={UserProfile}>
           <Route path='/following' />
