@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { signIn } from '../actions/signin-actions'
@@ -9,6 +10,7 @@ class UserSignInForm extends Component {
 
     return (
       <div id='user-sign-in-form'>
+        <Link to='/signup'>sign up</Link>
         <form id='sign-in-form'>
           <input type='text'     ref='identifier' placeholder='ID or email' />
           <input type='password' ref='password'   placeholder='password' />
