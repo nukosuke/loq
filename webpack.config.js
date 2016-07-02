@@ -24,8 +24,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.css$/, loader: 'css' },
-      { test: /\.scss$/, loader: 'scss' },
+      { test: /\.css$/, loaders: ['style', 'css'] },
+      { test: /\.scss$/, loaders: ['style', 'css', 'scss'] },
     ],
   },
   plugins: [
